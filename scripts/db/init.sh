@@ -1,0 +1,1 @@
+mysql -U $MYSQL_DBUSER -d $MYSQL_DBNAME -a -f /app/src/scripts/db/base.sql
