@@ -1,7 +1,8 @@
 ## Requirements
 1. Extension sql aktif
 2. PHP versi 8
-3. Cara aktifin extension pergi ke folder tempat kalian install php. Buat file php.ini.
+3. Docker versi 3.8 ke atas
+4. Cara aktifin extension pergi ke folder tempat kalian install php. Buat file php.ini.
 Masukkan line berikut:
 ```
 extension=pdo_mysql
@@ -15,3 +16,8 @@ extension=mysqli
 3. Import base.sql dari scripts/db ke database kalian dengan command `mysql -u username -p database_name < file.sql`
 4. Pindah ke direktori src
 5. Jalankan php dengan `php -S localhost:8080`
+
+## Panduan menjalankan dengan docker
+1. Install docker
+2. Clone repo ini
+3. Jalankan command `docker-compose up`
