@@ -7,7 +7,6 @@ RUN docker-php-ext-install pdo pdo_mysql mysqli
 RUN a2enmod rewrite
 
 WORKDIR /var
-# Copy ke /var/scripts
 COPY ./scripts/db/base.sql ./scripts/db/base.sql
 EXPOSE 80/tcp
 EXPOSE 443/tcp

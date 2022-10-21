@@ -4,7 +4,8 @@ services:
   web:
     container_name: php8
     volumes:
-      - ./src:/var/www/html
+      - ./src/public:/var/www/html
+      - ./src/app:/var/www/app
     build:
       context: .
       dockerfile: Dockerfile
@@ -27,8 +28,17 @@ services:
       - MYSQL_ROOT_PASSWORD=binotifyspotipai
       - MYSQL_DATABASE=binotifydb
       - MYSQL_TCP_PORT=3306
-      - MYSQL_USER=user
+      - MYSQL_USER=root
       - MYSQL_PASSWORD=user
     volumes:
       - ./scripts/db:/docker-entrypoint-initdb.d
     restart: always
+
+  adminer:
+    container_name: adminer
+    image: adminer:4.8.1
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql
+    restart: always
+    ports:
+      - 3535:8080
