@@ -1,12 +1,10 @@
 version: '3.8'
 
-#volume buat db
-volumes:
-  db-data:
-
 services:
   web:
     container_name: php8
+    volumes:
+      - ./src:/var/www/html
     build:
       context: .
       dockerfile: Dockerfile
@@ -29,6 +27,8 @@ services:
       - MYSQL_ROOT_PASSWORD=binotifyspotipai
       - MYSQL_DATABASE=binotifydb
       - MYSQL_TCP_PORT=3306
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=user
     volumes:
-      - db-data:/var/db
+      - ./scripts/db:/docker-entrypoint-initdb.d
     restart: always

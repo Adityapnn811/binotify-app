@@ -7,8 +7,6 @@ RUN docker-php-ext-install pdo pdo_mysql mysqli
 RUN a2enmod rewrite
 
 WORKDIR /var
-COPY src /var/www/html/
-COPY ./scripts/db/init.sh /docker-entrypoint-initdb.d
 # Copy ke /var/scripts
 COPY ./scripts/db/base.sql ./scripts/db/base.sql
 EXPOSE 80/tcp

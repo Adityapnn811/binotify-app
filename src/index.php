@@ -35,6 +35,7 @@
             
 
             echo "Server is ready <br/>";
+            echo "Test reload <br/>";
 
             $db_conn->close();
 
