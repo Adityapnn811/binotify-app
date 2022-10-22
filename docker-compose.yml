@@ -17,7 +17,6 @@ services:
       - MYSQL_DBNAME=binotifydb
     ports:
       - 8080:80
-      - 8083:443
     depends_on:
       - mysql
   

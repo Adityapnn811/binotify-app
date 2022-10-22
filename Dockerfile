@@ -9,4 +9,3 @@ RUN a2enmod rewrite
 WORKDIR /var
 COPY ./scripts/db/base.sql ./scripts/db/base.sql
 EXPOSE 80/tcp
-EXPOSE 443/tcp
