@@ -12,7 +12,7 @@ services:
     environment:
       - MYSQL_DBHOST=mysql
       - MYSQL_DBPORT=3306
-      - MYSQL_DBUSER=root
+      - MYSQL_DBUSER=user
       - MYSQL_DBPASS=binotifyspotipai
       - MYSQL_DBNAME=binotifydb
     ports:
@@ -28,8 +28,8 @@ services:
       - MYSQL_ROOT_PASSWORD=binotifyspotipai
       - MYSQL_DATABASE=binotifydb
       - MYSQL_TCP_PORT=3306
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=user
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=binotifyspotipai
     volumes:
       - ./scripts/db:/docker-entrypoint-initdb.d
     restart: always
@@ -40,5 +40,7 @@ services:
     environment:
       ADMINER_DEFAULT_SERVER: mysql
     restart: always
+    depends_on:
+      - mysql
     ports:
       - 3535:8080
