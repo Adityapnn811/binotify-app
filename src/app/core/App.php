@@ -45,22 +45,5 @@
                 return $url;
             }
         }
-
-        public function connect_db() {
-            getenv('MYSQL_DBHOST') ? $db_host=getenv('MYSQL_DBHOST') : $db_host='localhost';
-            getenv('MYSQL_DBUSER') ? $db_user=getenv('MYSQL_DBUSER') : $db_user='root';
-            getenv('MYSQL_DBPASS') ? $db_pass=getenv('MYSQL_DBPASS') : $db_pass='aditya962';
-            getenv('MYSQL_DBNAME') ? $db_name=getenv('MYSQL_DBNAME') : $db_name='binotifydb';
-            getenv('MYSQL_DBPORT') ? $db_port=getenv('MYSQL_DBPORT') : $db_port='3306';
-
-            $db_conn = new mysqli("$db_host:$db_port", $db_user, $db_pass, $db_name);
-
-            // check connection error
-            if ($db_conn->connect_error) {
-                die("Connection failed: " . $db_conn->connect_error);
-            }
-
-            return $db_conn;
-        }
     }
 ?>
