@@ -8,6 +8,6 @@
             $this->view('templates/footer');
         }
 
-        // Tambahin page di bawah
+        // Tambahin page/api di bawah
     }
 ?>
