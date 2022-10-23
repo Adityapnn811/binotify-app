@@ -7,64 +7,51 @@
             $this->db = new Database;
         }
 
-        public function searchSong(){
-            // BELOM NGITUNG MAKS
-            $q = $_POST["q"];
-            $tahun = $_POST["q"];
-            $sort = $_POST["sort"];
-            $genre = rtrim($_POST["genre"], ",");
-            $genre = explode(",", $genre);
-            $genre = implode("', '", $genre);
-            $page = (int) $_POST["page"];
-            $offset = 10 * ($page-1);
-
-            if (is_numeric($q)) {
-                $tahun = (int) $q;
-            }
-
-            if ($genre === "") {
-                $query = "SELECT * FROM $this->table WHERE Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun ORDER BY Judul $sort LIMIT 10 OFFSET :offset";
+        public function searchSong($recordPerPage = 10) {
+            if (count($_POST) === 0) {
+                $q ="";
+                $tahun = "";
+                $sort = "asc";
+                $genre = "";
+                $page = 1;
             } else {
-                $query = "SELECT * FROM $this->table WHERE Genre IN ('" . $genre . "') AND (Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun)  ORDER BY Judul $sort LIMIT 10 OFFSET :offset";
+                $q = $_POST["q"];
+                $tahun = $_POST["q"];
+                $sort = $_POST["sort"];
+                $genre = rtrim($_POST["genre"], ",");
+                $genre = str_replace(" ", "", $genre);
+                $genre = explode(",", $genre);
+                $genre = implode("', '", $genre);
+                $page = (int) $_POST["page"];
+                if (is_numeric($q)) {
+                    $tahun = (int) $q;
+                }
             }
+            $offset = $recordPerPage * ($page-1);
+            
+            if ($genre === "") {
+                $queryCount = "SELECT * FROM $this->table WHERE Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun";
+                $query = "SELECT * FROM $this->table WHERE Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun ORDER BY Judul $sort LIMIT :recordPerPage OFFSET :offset";
+            } else {
+                $queryCount = "SELECT * FROM $this->table WHERE Genre IN ('" . $genre . "') AND (Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun)";
+                $query = "SELECT * FROM $this->table WHERE Genre IN ('" . $genre . "') AND (Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun)  ORDER BY Judul $sort LIMIT :recordPerPage OFFSET :offset";
+            }
+            // Jalankan query count dulu
+            $this->db->query($queryCount);
+            $this->db->bind('q', "%$q%");
+            $this->db->bind('tahun', $tahun);
+            $this->db->execute();
+            $maxPage = (int) ceil($this->db->rowCount()/$recordPerPage);
 
             $this->db->query($query);
             $this->db->bind('q', "%$q%");
+            $this->db->bind('recordPerPage', $recordPerPage);
             $this->db->bind('tahun', $tahun);
             $this->db->bind('offset', $offset);
 
             
-            return $this->db->rowCount();
+            return array ($this->db->allResult(), $maxPage);
 
-        }
-
-        public function countSearchRow(){
-            $q = $_POST["q"];
-            $tahun = $_POST["q"];
-            $sort = $_POST["sort"];
-            $genre = rtrim($_POST["genre"], ",");
-            $genre = explode(",", $genre);
-            $genre = implode("', '", $genre);
-            $page = (int) $_POST["page"];
-            $offset = 10 * ($page-1);
-
-            if (is_numeric($q)) {
-                $tahun = (int) $q;
-            }
-
-            if ($genre === "") {
-                $query = "SELECT * FROM $this->table WHERE Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun";
-                
-            } else {
-                $query = "SELECT * FROM $this->table WHERE Genre IN ('" . $genre . "') AND (Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun)";
-            }
-
-            $this->db->query($query);
-            $this->db->bind('q', "%$q%");
-            $this->db->bind('tahun', $tahun);
-            $this->db->execute();
-
-            return (int) ceil($this->db->rowCount()/10);
         }
 
     }

@@ -3,8 +3,9 @@
         // method default adalah index (harus ada)
         public function index(){
             // Ngitung total row dulu
-            $data["lagu"] = $this->model("Lagu_model")->searchSong();
-            $data["maxPage"] = $this->model("Lagu_model")->countSearchRow();
+            $dataAwal = $this->model("Lagu_model")->searchSong(6);
+            $data["lagu"] = $dataAwal[0];
+            $data["maxPage"] = $dataAwal[1];
 
             $this->view('templates/header');
             $this->view('search/index', $data);

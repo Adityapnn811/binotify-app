@@ -28,3 +28,30 @@ CREATE TABLE IF NOT EXISTS Song (
     album_id int NOT NULL,
     FOREIGN KEY (album_id) REFERENCES Album (album_id)
 );
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('coba 3', 'coba', '2022-10-10', 'pop', 10, '/img/', "/img/apa.jpg", 1)
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('coba 4', 'coba', '2022-10-10', 'rock', 10, '/img/', "/img/apa.jpg", 1)
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('coba 5', 'coba', '2022-10-10', 'rock', 10, '/img/', "/img/apa.jpg", 1)
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('coba 6', 'coba', '2022-10-10', 'pop', 10, '/img/', "/img/apa.jpg", 1)
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('coba 7', 'coba', '2022-10-10', 'pop', 10, '/img/', "/img/apa.jpg", 1)
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('coba 8', 'coba', '2022-10-10', 'rock', 10, '/img/', "/img/apa.jpg", 1)
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('coba 9', 'coba', '2022-10-10', 'rock', 10, '/img/', "/img/apa.jpg", 1)
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('coba 10', 'coba', '2022-10-10', 'pop', 10, '/img/', "/img/apa.jpg", 1)
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('coba 11', 'coba', '2022-10-10', 'rock', 10, '/img/', "/img/apa.jpg", 1)
