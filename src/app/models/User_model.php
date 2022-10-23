@@ -7,9 +7,14 @@
             $this->db = new Database;
         }
 
-        public function getUser() {
+        public function getAllUser($pageNow, $recordPerPage = 10) {
             $this->db->query("SELECT * FROM $this->table");
-            return $this->db->singleResult();
+            $result = $this->db->allResult();
+            $totalRecord = count($result);
+            $maxPage = (int) ceil($totalRecord/$recordPerPage);
+            $offset = $recordPerPage * ($pageNow-1);
+            $paginatedRes = array_slice($result, $offset, $recordPerPage);
+            return array($paginatedRes, $maxPage);
         }
     }
 ?>

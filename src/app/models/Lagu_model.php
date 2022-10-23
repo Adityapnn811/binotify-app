@@ -19,8 +19,10 @@
                 $tahun = $_POST["q"];
                 $sort = strtolower($_POST["sort"]);
                 $genre = rtrim($_POST["genre"], ",");
-                $genre = str_replace(" ", "", $genre);
                 $genre = explode(",", $genre);
+                foreach ($genre as $key => $value) {
+                    $genre[$key] = trim($value, " ");
+                }
                 $genre = implode("', '", $genre);
                 $page = (int) $_POST["page"];
                 if (is_numeric($q)) {
