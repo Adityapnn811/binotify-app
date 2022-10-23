@@ -1,5 +1,15 @@
 <?php
     session_start();
+
+    if (isset($_SESSION["is_admin"])) {
+        if ($_SESSION["is_admin"] === false) {
+            header('Location: '. $data["URLRedirect"]);
+            die();
+        }
+    } else {
+        header('Location: '. $data["URLRedirect"]);
+        die();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
