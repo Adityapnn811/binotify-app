@@ -113,3 +113,16 @@ body { min-height: 100vh; }
     background: #242424;
     cursor: pointer;
 }
+
+table {
+    width: 80%;
+    margin-bottom: 20px;
+    background: #2a2a2a;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+td {
+    text-align: center;
+    overflow: hidden;
+  }
