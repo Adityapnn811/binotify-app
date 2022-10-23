@@ -95,3 +95,21 @@ body { min-height: 100vh; }
     background: #242424;
     cursor: pointer;
 }
+
+.navbar{
+    background-color: rgb(18, 18, 18);
+    grid-area: nav;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px 0 30px;
+}
+
+.form-inline{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
