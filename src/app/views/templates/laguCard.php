@@ -8,7 +8,7 @@ function laguCard($id= "1", $judul = "Judul", $penyanyi = "penyanyi", $tahun="20
             <div class="imgCardContainer">
                 <img src="$img" alt="cover lagu" class="laguImg">
             </div>
-            <div class="infoLagu">
+            <div class="info">
                 <h2>$judul</h2>
                 <p hidden>$id</p>
                 <p>$penyanyi</p>

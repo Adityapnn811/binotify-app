@@ -35,7 +35,7 @@
         <div class="pagination">
             <?php for($page = 1; $page<= $data["maxPage"]; $page++): ?>
                 <?php empty($_POST) ? $currentPage = 1 : $currentPage = (int) $_POST["page"] ?>
-                <?= paginationButton($_POST, $currentPage, "/search", $page) ?>
+                <?= paginationSearchButton($_POST, $currentPage, "/search", $page) ?>
             <?php endfor; ?>
         </div>
     </div>
