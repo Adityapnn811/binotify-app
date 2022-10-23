@@ -31,10 +31,8 @@
             
             if ($genre === "") {
                 $queryCount = "SELECT * FROM $this->table WHERE Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun";
-                $query = "SELECT * FROM $this->table WHERE Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun ORDER BY Judul $sort LIMIT :recordPerPage OFFSET :offset";
             } else {
                 $queryCount = "SELECT * FROM $this->table WHERE Genre IN ('" . $genre . "') AND (Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun)";
-                $query = "SELECT * FROM $this->table WHERE Genre IN ('" . $genre . "') AND (Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun)  ORDER BY Judul $sort LIMIT :recordPerPage OFFSET :offset";
             }
             // Jalankan query count dulu
             $this->db->query($queryCount);
@@ -42,12 +40,6 @@
             $this->db->bind('tahun', $tahun);
             $this->db->execute();
             $maxPage = (int) ceil($this->db->rowCount()/$recordPerPage);
-
-            $this->db->query($query);
-            $this->db->bind('q', "%$q%");
-            $this->db->bind('recordPerPage', $recordPerPage);
-            $this->db->bind('tahun', $tahun);
-            $this->db->bind('offset', $offset);
 
             
             return array ($this->db->allResult(), $maxPage);
