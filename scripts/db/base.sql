@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS Song (
     Duration int NOT NULL,
     Audio_path varchar(256) NOT NULL,
     Image_path varchar(256) NOT NULL,
-    album_id int NOT NULL,
+    album_id int,
     FOREIGN KEY (album_id) REFERENCES Album (album_id)
 );
 
