@@ -1,9 +1,14 @@
-
 <h1> Welcome to Binotify </h1>
-<?php
-    if ($data['username'] == "username default") {
-        echo "Hi there! Register here!";
-    } else {
-        echo "Hello, " . $data['username'];
-    }
-?>
+<form method="post" action="/search">
+<input type="hidden" name="page" value="1"/>
+<input type="text" name="q" id="q" placeholder="Masukkan judul, tahun, penyanyi" autocomplete="off"/>
+<label for="sort">A-Z:</label>
+<select name="sort" id="sort">
+    <option value="Asc">Ascending</option>
+    <option value="Desc">Descending</option>
+</select>
+<label for="genre">Genre:</label>
+<input type="text" name="genre" id="genre" placeholder="pop, rock" autocomplete="off"/>
+
+<button type="submit">Search</button>
+</form>
