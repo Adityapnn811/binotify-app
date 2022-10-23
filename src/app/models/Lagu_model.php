@@ -17,7 +17,7 @@
             } else {
                 $q = $_POST["q"];
                 $tahun = $_POST["q"];
-                $sort = $_POST["sort"];
+                $sort = strtolower($_POST["sort"]);
                 $genre = rtrim($_POST["genre"], ",");
                 $genre = str_replace(" ", "", $genre);
                 $genre = explode(",", $genre);
@@ -30,20 +30,21 @@
             $offset = $recordPerPage * ($page-1);
             
             if ($genre === "") {
-                $queryCount = "SELECT * FROM $this->table WHERE Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun";
+                $query = "SELECT * FROM $this->table WHERE Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun ORDER BY Judul $sort";
             } else {
-                $queryCount = "SELECT * FROM $this->table WHERE Genre IN ('" . $genre . "') AND (Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun)";
+                $query = "SELECT * FROM $this->table WHERE Genre IN ('" . $genre . "') AND (Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun) ORDER BY Judul $sort";
             }
             // Jalankan query count dulu
-            $this->db->query($queryCount);
+            $this->db->query($query);
             $this->db->bind('q', "%$q%");
             $this->db->bind('tahun', $tahun);
-            $this->db->execute();
-            $maxPage = (int) ceil($this->db->rowCount()/$recordPerPage);
 
-            
-            return array ($this->db->allResult(), $maxPage);
+            $result = $this->db->allResult();
+            $totalRecord = count($result);
+            $maxPage = (int) ceil($totalRecord/$recordPerPage);
+            $paginatedRes = array_slice($result, $offset, $recordPerPage);
 
+            return array ($paginatedRes, $maxPage);
         }
 
     }
