@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS User (
     user_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     email varchar(255) NOT NULL,
     password varchar(256) NOT NULL,
-    username varchar(256) NOT NULL,
+    username varchar(256) NOT NULL UNIQUE,
     is_admin boolean NOT NULL
 );
 
