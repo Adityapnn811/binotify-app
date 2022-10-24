@@ -8,5 +8,19 @@
         }
 
         // Tambahin page/api di bawah
+        // function __construct(){
+        //     parent::__construct();
+        // }
+
+
+        function run(){
+		    $this->model("Login_model")->run();
+	    }
+
+        function logout(){
+            session_destroy();
+            header('location: '.'/home/index');
+            exit;
+        }
     }
 ?>
