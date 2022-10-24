@@ -11,4 +11,18 @@
 <input type="text" name="genre" id="genre" placeholder="pop, rock" autocomplete="off"/>
 
 <button type="submit">Search</button>
+
+<?php if (!isset($_SESSION["username"])) : ?>
+    <a href="/login"> login <a>
+
+<?php else : ?>
+    <?php if ($_SESSION["is_admin"]) : ?>
+        <a href="/login/logout">Log Out</a>
+        <a class="active_link" href="./dashboard.php">Dashboard</a>
+    <?php else : ?>
+        <a href="./searching.php">Search Dorayaki</a>
+        <a href="/login/logout">Log Out</a>
+        <a class="active_link" href="./dashboard.php">Dashboard</a>
+    <?php endif; ?>
+<?php endif; ?>
 </form>
