@@ -1,13 +1,16 @@
 <?php
-
-    if (isset($_SESSION["is_admin"])) {
-        if ($_SESSION["is_admin"] === false) {
-            header('Location: '. $data["URLRedirect"]);
+    $error = "";
+    if (!empty($data)) {
+        // login button clicked
+        // cek apakah berhasil
+        if ($data["status"] == 200){
+            $_SESSION["username"] = $data["username"];
+            $_SESSION["is_admin"] = $data["is_admin"];
+            header('location: /home/index');
             die();
+        }else{
+            $error = $data["error"];
         }
-    } else {
-        header('Location: '. $data["URLRedirect"]);
-        die();
     }
 ?>
 <!DOCTYPE html>

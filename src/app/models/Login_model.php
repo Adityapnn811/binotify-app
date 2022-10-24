@@ -17,25 +17,22 @@
             $this->db->execute();
             
             $count = $this->db->rowCount();
-            if($count<1){
-                // Kosong, tidak ada user dg username itu
-            } else{
-                $user = $this->db->singleResult();
-            
-                if (password_verify($password, $user["password"])) {
-                    // password sama
-                    $_SESSION["username"] = $user["username"];
-                    $_SESSION["is_admin"] = $user["is_admin"];
-                    header('location: '.'/home/index');
-                } else {
-                    // password beda
-                    header('location: '.'search/index');
-                }
-            }
-
-            
-            
-            
+            $user = $this->db->singleResult();
+            return array($user, $count);
+            // if($count<1){
+            //     // Kosong, tidak ada user dg username itu
+            //     return ($user, $count);
+            // } else{
+            //     // if (password_verify($password, $user["password"])) {
+            //     //     // password sama
+            //     //     $_SESSION["username"] = $user["username"];
+            //     //     $_SESSION["is_admin"] = $user["is_admin"];
+            //     //     header('location: '.'/home/index');
+            //     // } else {
+            //     //     // password beda
+            //     //     header('location: '.'/search/index');
+            //     // }
+            // }
         }
     }
 ?>
