@@ -31,16 +31,19 @@
     </div>
 
     <div class="cardContainer">
-        <?php foreach($data["lagu"] as $idx=>$info): ?>
-            <?= laguCard($info["song_id"], $info["Judul"], $info["Penyanyi"], substr($info["Tanggal_terbit"], 0, 4), $info["Genre"], $info["Image_path"]) ?>
-        <?php endforeach; ?>
-
-        <div class="pagination">
-            <?php for($page = 1; $page<= $data["maxPage"]; $page++): ?>
-                <?php empty($_POST) ? $currentPage = 1 : $currentPage = (int) $_POST["page"] ?>
-                <?= paginationSearchButton($_POST, $currentPage, "/search", $page) ?>
-            <?php endfor; ?>
-        </div>
+        <?php if (empty($data["lagu"])): ?>
+            <h1>Tidak ada hasil pencarian</h1>
+        <?php else : ?>
+            <?php foreach($data["lagu"] as $idx=>$info): ?>
+                <?= laguCard($info["song_id"], $info["Judul"], $info["Penyanyi"], substr($info["Tanggal_terbit"], 0, 4), $info["Genre"], $info["Image_path"]) ?>
+            <?php endforeach; ?>
+            <div class="pagination">
+                <?php for($page = 1; $page<= $data["maxPage"]; $page++): ?>
+                    <?php empty($_POST) ? $currentPage = 1 : $currentPage = (int) $_POST["page"] ?>
+                    <?= paginationSearchButton($_POST, $currentPage, "/search", $page) ?>
+                <?php endfor; ?>
+            </div>
+        <?php endif; ?>
     </div>
 
 </div>
