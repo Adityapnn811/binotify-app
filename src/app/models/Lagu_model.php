@@ -49,5 +49,12 @@
             return array ($paginatedRes, $maxPage);
         }
 
+        public function getSongById($id) {
+            $query = "SELECT * FROM $this->table WHERE song_id = :id";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            return $result;
+        }
     }
 ?>
