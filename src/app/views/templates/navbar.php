@@ -2,9 +2,11 @@
     function navbar(){
         $html = <<<"EOT"
             <form method="post" action="/search">
-                <input type="hidden" name="page" value="1"/>
-                <input type="text" name="q" id="q" placeholder="Masukkan judul, tahun, penyanyi" autocomplete="off"/>
-                <button type="submit">Search</button>
+                <div class="querySearchNavbar">
+                    <input type="hidden" name="page" value="1"/>
+                    <input type="text" name="q" id="q" placeholder="Masukkan judul, tahun, penyanyi" class="searchTerm" autocomplete="off"/>
+                    <button type="submit" class="searchButton"><img src="./img/search.png" width="33px" alt="magnifying glass icon"></button>
+                </div>
             </form>
             EOT;
         if (!isset($_SESSION["username"])) {
