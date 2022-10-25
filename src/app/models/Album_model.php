@@ -22,6 +22,13 @@
             $paginatedRes = array_slice($result, $offset, $recordPerPage);
             return array ($paginatedRes, $maxPage);
         }
-
+        
+        public function getAlbumById($id) {
+            $query = "SELECT * FROM $this->table WHERE album_id = :id";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            return $result;
+        }
     }
 ?>
