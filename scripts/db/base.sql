@@ -30,73 +30,87 @@ CREATE TABLE IF NOT EXISTS Song (
 );
 
 INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Album coba', 'coba', 70, '/img/album.jpg', '2022-10-10', 'pop');
+VALUES ('Blurryface',	'Twenty One Pilots',	70,	'./img/blurryface.png',	'2022-10-10',	'alt rock');
 
 INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Album coba 2', 'coba', 70, '/img/album.jpg', '2022-10-10', 'rock');
+VALUES ('Speak Now',	'Taylor Swift',	67,	'./img/SpeakNow.png',	'2022-10-04',	'Pop music');
 
 INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Album coba 33', 'coba', 70, '/img/album.jpg', '2022-10-10', 'blues');
+VALUES ('1989',	'Taylor Swift',	68,	'./img/1989.png',	'2014-11-11',	'Synth pop');
 
 INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Album coba 4', 'coba', 70, '/img/album.jpg', '2022-10-10', 'techno');
+VALUES ('Tulus',	'Tulus',	29,	'./img/tulus.jpg',	'2011-11-11',	'Pop music');
 
 INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Blurryface', 'Twenty One Pilots', 70, './img/blurryface.png', '2022-10-10', 'alt rock');
+VALUES ('Positions',	'Ariana Grande',	51,	'./img/positions.png',	'2021-10-10',	'R&B/Soul');
 
 INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Album Foto', 'Kamera', 70, '/img/album.jpg', '2022-10-10', 'kamera');
+VALUES ('In The Lonely Hour',	'Sam Smith',	35,	'./img/inTheLonelyHour.png',	'2014-05-04',	'Neo-R&B');
 
 INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Album Foto 2', 'Kamera', 70, '/img/album.jpg', '2022-10-10', 'kamera');
+VALUES ('Shivers',	'Ed Sheeran',	7,	'./img/shivers.png',	'2021-02-02',	'Alternative/Indie');
 
-INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Album Foto 3', 'Kamera', 70, '/img/album.jpg', '2022-10-10', 'kamera');
-
-INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Kumpulan Hits', 'YouTube', 70, '/img/album.jpg', '2022-10-10', 'pop');
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
-VALUES ('coba 3', 'coba', '2022-10-10', 'pop', 10, '/img/', "/img/apa.jpg", 1);
+VALUES ('Stressed Out', 'Twenty One Pilots', '2022-10-10', 'alt rock', 10, '/img/', './img/blurryface.png', 1);
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
-VALUES ('coba 4', 'coba', '2022-10-10', 'rock', 10, '/img/', "/img/apa.jpg", 1);
+VALUES ('Mine', 'Taylor Swift', '2010-11-11', 'Pop music', 4, '/img/', './img/SpeakNow.png', 2);
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
-VALUES ('coba 5', 'coba', '2022-10-10', 'rock', 10, '/img/', "/img/apa.jpg", 1);
+VALUES ('Better Than Revenge', 'Taylor Swift', '2010-11-11', 'Pop music', 3, '/img/', './img/SpeakNow.png', 2);
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
-VALUES ('coba 6', 'coba', '2022-10-10', 'pop', 10, '/img/', "/img/apa.jpg", 1);
+VALUES ('Back To December', 'Taylor Swift', '2010-11-11', 'Pop music', 5, '/img/', './img/SpeakNow.png', 2);
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
-VALUES ('coba 7', 'coba', '2022-10-10', 'pop', 10, '/img/', "/img/apa.jpg", 1);
+VALUES ('Wildest Dreams', 'Taylor Swift', '2014-11-11', 'Synth pop', 4, '/img/', './img/1989.png', 3);
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
-VALUES ('coba 8', 'coba', '2022-10-10', 'rock', 10, '/img/', "/img/apa.jpg", 1);
+VALUES ('Style', 'Taylor Swift', '2014-11-11', 'Synth pop', 4, '/img/', './img/1989.png', 3);
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
-VALUES ('coba 9', 'coba', '2022-10-10', 'rock', 10, '/img/', "/img/apa.jpg", 1);
+VALUES ('Sewindu', 'Tulus', '2011-11-11', 'Pop music', 4, '/img/', './img/tulus.jpg', 4);
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
-VALUES ('coba 10', 'coba', '2022-10-10', 'pop', 10, '/img/', "/img/apa.jpg", 1);
+VALUES ('Shake It Off', 'Taylor Swift', '2014-11-11', 'Synth pop', 4, '/img/', './img/1989.png', 3);
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
-VALUES ('coba 11', 'coba', '2022-10-10', 'rock', 10, '/img/', "/img/apa.jpg", 1);
+VALUES ('Teman Hidup', 'Tulus', '2011-11-11', 'Pop music', 4, '/img/', './img/tulus.jpg', 4);
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
-VALUES ('Stressed Out', 'Twenty One Pilots', '2022-10-10', 'alt rock', 10, '/img/', "./img/blurryface.png", 5);
+VALUES ('34+35', 'Ariana Grande', '2021-10-10', 'Contemporary R&B', 3, '/img/', './img/positions.png', 5);
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('pov', 'Ariana Grande', '2021-10-10', 'Rhythm and blues', 3, '/img/', './img/positions.png', 5);
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('Stay With Me', 'Sam Smith', '2014-05-04', 'Soul music', 3, '/img/', './img/inTheLonelyHour.png', 6);
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('Shivers', 'Ed Sheeran', '2021-02-02', 'Alternative/Indie', 3, '/img/', './img/shivers.png', 7);
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('Bad Habits', 'Ed Sheeran', '2021-02-02', 'Alternative/Indie', 3, '/img/', './img/shivers.png', 7);
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('Kisah Sebentar', 'Tulus', '2011-11-11', 'Pop music', 4, '/img/', './img/tulus.jpg', 4);
+
+INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
+VALUES ('New Romantics', 'Taylor Swift', '2014-11-11', 'Synth pop', 4, '/img/', './img/1989.png', 3);
+
 
 INSERT INTO User (email, password, username, is_admin)
-VALUES ('apn725@gmama.com', 'passssss', 'apnn', false);
+VALUES ('admin@gmail.com',	'$2y$10$iBVwrblN1uIUCM/jOTUWcupusFlk55goYl6aI3INGBnhkEYqXqtjC',	'admin', true);
 
 INSERT INTO User (email, password, username, is_admin)
-VALUES ('apn75@gmama.com', 'word', 'apnn2', false);
+VALUES ('user@gmail.com',	'$2y$10$j86bYERe7.hu/Rb4UwAyCehglN5wKU0Q.qNyaNYtLwY.GuWOB4Iji',	'user', false);
 
 INSERT INTO User (email, password, username, is_admin)
-VALUES ('apn5@gmama.com', 'word', 'apnn23', false);
+VALUES ('monic@gmail.com', '$2y$10$nWN8fKvmxPeSzvN277QcZuJ7NGE.c8gwb9P5ANzA746TXsXyHxuku', 'monic', false);
 
 INSERT INTO User (email, password, username, is_admin)
-VALUES ('ap75@gmama.com', 'word', 'apnn24', false);
+VALUES ('adit@gmail.com', '$2y$10$v94G9lgm9kaNPK1B7DB5COjaPXaZdyvSurCIlWqav/vg3BCDur3sG', 'adit', false);
 
 INSERT INTO User (email, password, username, is_admin)
-VALUES ('ap@gmama.com', 'word', 'apnn3', false);
+VALUES ('nathan@gmail.com', '$2y$10$vSGgl/xA.ydPUfumzDNiROA1Gm3sW1jgOUzM90Hork0VKR9/7NFA6', 'nathan', false);
