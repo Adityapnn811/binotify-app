@@ -4,7 +4,7 @@
         // Register button clicked
         // cek apakah berhasil
         if ($data["status"] == 200){
-            header('location: /home/index');
+            header('location: /home');
             die();
         }else{
             $error = $data["error_msg"];
