@@ -21,7 +21,8 @@
                     <input type="hidden" name="q" id="q" value="$q" />
                     <input type="hidden" name="sort" id="sort" value="$sort"/>
                     <input type="hidden" name="sortYear" id="sortYear" value="$sortYear"/>
-                    <input type="hidden" name="genre" id="genre" value="$genre"/>                    <button type="submit" class="$class">$page</button>
+                    <input type="hidden" name="genre" id="genre" value="$genre"/>
+                    <button type="submit" class="$class">$page</button>
             </form>
             EOT;
 

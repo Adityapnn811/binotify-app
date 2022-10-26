@@ -56,8 +56,6 @@
             EOT;
         }
         
-        
-
         echo $start.$middle.$end;
     }
 ?>
