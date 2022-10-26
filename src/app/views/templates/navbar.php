@@ -29,6 +29,7 @@
                 </nav>
             EOT;
         } else {
+            $username = $_SESSION["username"];
             if ($_SESSION["is_admin"]) {
                 $start .= <<<"EOT"
                     <a href="/users">Daftar User</a>
@@ -43,10 +44,15 @@
                 EOT;
             }
             $end = <<<"EOT"
-            <button class="redButton">
-                <a href="/login/logout">LOGOUT</a>
-            </button>
+            <div class="dropdown username">
+                <button class="dropbtn" id="usernamebtn">Hi, $username!
+                </button>
+                <div class="dropdown-content">
+                    <a href="/login/logout" id="logout">Log out</a>
+                </div>
             </div>
+            </div>
+            </nav>
             EOT;
         }
         
