@@ -9,25 +9,50 @@
 
         // Tambahin page/api di bawah
         function signup(){
-            $user_name=$_POST['user_name'];
-            $email_id=$_POST['email_id'];
+            $username=$_POST['username'];
+            $confirm_password=$_POST['confirm_password'];
+            $email=$_POST['email'];
             $password=$_POST['password'];
 
-            $count=$this->model("Register_model")->check_user($user_name,$email_id);
-
-            if($count > 0){
-                echo 'This User Already Exists';
+            if($password == $confirm_password){
+                $count=$this->model("Register_model")->check_user($username,$email);
+                
+                if($count > 0){
+                    $data = array(
+                        'status' => '400',
+                        'error_msg' => 'username or email already exist',
+                    );
+                }else{
+                    $data = array(
+                        'username' =>$_POST['username'],
+                        'email' =>$_POST['email'],
+                        'password' =>$_POST['password'],
+                        'status' => '500',
+                        'error_msg' => '',
+                    );
+    
+                    $success = $this->model("Register_model")->insert_user($data);
+    
+                    if($success){
+                        $data["status"] = 200;
+                    }else{
+                        $data["status"] = 500;
+                        $data["error_msg"] = "gagal register";
+                    }
+                }
             }else{
+                //ga sama
                 $data = array(
-                'id' =>null,
-                'user_name' =>$_POST['user_name'],
-                'email_id' =>$_POST['email_id'],
-                'password' =>$_POST['password']
+                    'status' => '400',
+                    'error_msg' => 'password sm confirm password beda',
                 );
-                $this->model->insert_user($data);
             }
-            header('location:index');
-            }
+
+
+            $this->view('templates/headerRegister', $data);
+            $this->view('register/index', $data);
+            $this->view('templates/footer');
+        }
 
     }
 

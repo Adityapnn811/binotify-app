@@ -9,16 +9,6 @@
 
         public function check_user($username,$email){
 
-            // $this->db->query("SELECT * FROM `User` WHERE username=:username");
-            // $this->db->bind(':username', $username);
-            // $this->db->execute();
-            
-            // $count = $this->db->rowCount();
-            // $user = $this->db->singleResult();
-            
-            
-            // $result= $this->db->select("SELECT * FROM `User` WHERE user_name = '".$user_name."' OR email_id = '".$email_id."'");
-            // $count = count($result);
             
             $this->db->query("SELECT * FROM `User` WHERE username=:username OR email=:email");
             $this->db->bind(':username', $username);
@@ -27,12 +17,35 @@
 
             $count = $this->db->rowCount();
             
-
             return $count;
         }
         
         public function insert_user($data){
-            $this->db->insert('register', $data);
+            $email = $data["email"];
+            $username = $data["username"];
+            $password = password_hash($data["password"], PASSWORD_BCRYPT);
+
+            try{
+                $this->db->query("INSERT INTO `User`(email, password, username, is_admin) VALUE (:email, :password, :username, 0)");
+                $this->db->bind(':email', $email);
+                $this->db->bind(':username', $username);
+                $this->db->bind(':password', $password);
+    
+                $this->db->execute();
+
+                return true;
+
+            } catch (PDOException $e){
+                return false;
+            }
+
+
+            // if ($this->db->execute()){
+            //     return true;
+            // }else{
+
+            //     return false;
+            // }
         }
     }
 ?>
