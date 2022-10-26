@@ -23,7 +23,7 @@
         public function insert_user($data){
             $email = $data["email"];
             $username = $data["username"];
-            $password = $data["password"];
+            $password = password_hash($data["password"], PASSWORD_BCRYPT);
 
             try{
                 $this->db->query("INSERT INTO `User`(email, password, username, is_admin) VALUE (:email, :password, :username, 0)");
