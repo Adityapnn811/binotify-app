@@ -13,6 +13,7 @@
                 <div class="querySearchNavbar">
                     <input type="hidden" name="page" value="1"/>
                     <input type="hidden" name="sort" value="asc"/>
+                    <input type="hidden" name="sortYear" value=""/>
                     <input type="hidden" name="genre" value=""/>
                     <input type="text" name="q" id="q" placeholder="Masukkan judul, tahun, penyanyi" class="searchTerm" autocomplete="off"/>
                     <button type="submit" class="searchButton"><img src="./img/search.png" width="33px" alt="magnifying glass icon"></button>
