@@ -89,7 +89,7 @@ body {
 .info {
     width: 100%;
     display: grid;
-    grid-template-columns: 50% 40% 10%;
+    grid-template-columns: 50% 10% 40%;
     grid-template-areas:
         'judul tahun genre'
         'penyanyi tahun genre';
@@ -142,6 +142,8 @@ body {
 }
 
 .genre {
+    display: flex;
+    justify-content: flex-end;
     grid-area: 'genre';
     color: #b3b3b3;
     margin: 5px;
@@ -260,7 +262,7 @@ nav {
 
 a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 /* Untuk button */
