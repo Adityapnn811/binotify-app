@@ -2,16 +2,16 @@
 <a href="/home">SPOTIFY</a>
     <form method="post" action="/register/signup">
     Username:<br>
-    <input type="text" name="username" id="username" class="" require onkeyup="processUsernameChange(this.value)">
+    <input type="text" name="username" id="username" class="" required onkeyup="processUsernameChange(this.value)">
     <br>
     Email:<br>
-    <input type="text" name="email" id="email" class="" require onkeyup="processEmailChange(this.value)">
+    <input type="text" name="email" id="email" class="" required onkeyup="processEmailChange(this.value)">
     <br><br>
     Password:<br>
-    <input type="password" name="password" require>
+    <input type="password" name="password" required>
     <br><br>
     Confirm Password:<br>
-    <input type="password" name="confirm_password" require>
+    <input type="password" name="confirm_password" required>
     <br><br>
     <button type="submit" value="Submit" id="registerButton">Register</button>
     </form> 
