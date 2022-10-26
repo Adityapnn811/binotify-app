@@ -1,4 +1,9 @@
 <?php
+    require_once '../app/views/templates/navbar.php';
+?>
+
+<?= navbar() ?>
+<?php
     $id = $data["id"];
     $body = <<<"EOT"
             <body onload="loadData($id)">

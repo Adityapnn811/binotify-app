@@ -1,7 +1,10 @@
 <?php
     require_once "../app/views/templates/laguCard.php";
     require_once "../app/views/templates/paginationButton.php";
+    require_once '../app/views/templates/navbar.php';
 ?>
+
+<?= navbar() ?>
 <?php
     $id = $data["id"];
     $body = <<<"EOT"
