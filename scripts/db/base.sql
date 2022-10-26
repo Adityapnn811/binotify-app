@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS User (
     user_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    email varchar(255) NOT NULL,
+    email varchar(255) NOT NULL UNIQUE,
     password varchar(256) NOT NULL,
     username varchar(256) NOT NULL UNIQUE,
     is_admin boolean NOT NULL
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Song (
     Audio_path varchar(256) NOT NULL,
     Image_path varchar(256) NOT NULL,
     album_id int,
-    FOREIGN KEY (album_id) REFERENCES Album (album_id)
+    FOREIGN KEY (album_id) REFERENCES Album (album_id) ON DELETE SET NULL
 );
 
 INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
