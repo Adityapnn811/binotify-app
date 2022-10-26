@@ -50,7 +50,7 @@
 
         function logout(){
             session_destroy();
-            header('location: /home/index');
+            header('location: /home');
             exit;
         }
     }
