@@ -5,10 +5,10 @@ function albumCard($id= "1", $judul = "Judul", $penyanyi = "penyanyi", $tahun="2
     }
     $html = <<<"EOT"
         <div class="albumCard">
-            <div class="imgCardContainer">
-                <img src="$img" alt="cover album" class="laguImg">
+            <div class="imgAlbumCardContainer">
+                <img src="$img" alt="cover album" class="albumImg">
             </div>
-            <div class="info">
+            <div class="infoAlbum">
                 <h2>$judul</h2>
                 <p hidden>$id</p>
                 <p>By $penyanyi</p>

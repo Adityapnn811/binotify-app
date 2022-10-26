@@ -1,8 +1,10 @@
 <?php
     require_once "../app/views/templates/albumCard.php";
     require_once "../app/views/templates/paginationButton.php";
+    require_once '../app/views/templates/navbar.php';
 ?>
 
+<?= navbar() ?>
 <div class="cardContainer">
     <h2>Daftar Album</h2>
     <?php foreach($data["albums"] as $idx=>$info): ?>

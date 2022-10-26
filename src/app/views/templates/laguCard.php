@@ -9,11 +9,13 @@ function laguCard($id= "1", $judul = "Judul", $penyanyi = "penyanyi", $tahun="20
                 <img src="$img" alt="cover lagu" class="laguImg">
             </div>
             <div class="info">
-                <h2>$judul</h2>
                 <p hidden>$id</p>
-                <p>$penyanyi</p>
-                <p>$tahun</p>
-                <p>$genre</p>
+                <div>
+                    <p class="judulLagu">$judul</p>
+                    <p class="penyanyi">$penyanyi</p>
+                </div>
+                <p class="tahun">$tahun</p>
+                <p class="genre">$genre</p>
             </div>
         </div>
     EOT;
