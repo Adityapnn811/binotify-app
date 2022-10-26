@@ -12,12 +12,14 @@
                 $q ="";
                 $tahun = "";
                 $sort = "asc";
+                $sortYear = '';
                 $genre = "";
                 $page = 1;
             } else {
                 $q = $_POST["q"];
                 $tahun = $_POST["q"];
                 $sort = strtolower($_POST["sort"]);
+                $sortYear = strtolower($_POST["sortYear"]);
                 $genre = rtrim($_POST["genre"], ",");
                 $genre = explode(",", $genre);
                 foreach ($genre as $key => $value) {
@@ -35,6 +37,9 @@
                 $query = "SELECT * FROM $this->table WHERE Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun ORDER BY Judul $sort";
             } else {
                 $query = "SELECT * FROM $this->table WHERE Genre IN ('" . $genre . "') AND (Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun) ORDER BY Judul $sort";
+            }
+            if ($sortYear !== "") {
+                $query .= ", Tanggal_terbit $sortYear";
             }
             // Jalankan query count dulu
             $this->db->query($query);

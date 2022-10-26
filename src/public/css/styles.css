@@ -217,14 +217,24 @@ nav {
 
 #navItems {
     width: 40%;
-    margin-right: 1em;
+    margin-right: 0.8em;
     display: flex;
-    gap: 1em;
+    gap: 0.5em;
     align-items: center;
+    justify-content: flex-end;
 }
 
 #navItems form {
-    width: 100%;
+    width: 70%;
+}
+
+#navItems a {
+    font-size: x-large;
+    color: white;
+}
+
+.username {
+    width: 30%;
 }
 
 #navLinks {
@@ -243,11 +253,10 @@ nav {
 }
 
 #navLinks a:hover {
-    font-size: x-large;
-    color: white;
     border-bottom: 1px solid #1ed760;
     padding-bottom: 3px;
 }
+
 
 a {
     text-decoration: none;
@@ -298,8 +307,13 @@ a {
     color: white;
     background-color: inherit;
     padding: 0px 0px 10px 15px;
+    white-space: nowrap;
     font-family: inherit; /* Important for vertical align on mobile phones */
     margin: 0; /* Important for vertical align on mobile phones */
+}
+
+.dropdown .dropbtn:hover {
+    cursor: pointer;
 }
 
 /* Dropdown content*/
@@ -315,7 +329,16 @@ a {
 /* Links inside the dropdown */
 .dropdown-content a {
     float: none;
-    color: black;
+    color: rgb(255, 255, 255);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content #logout {
+    float: none;
+    color: #f32121;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -324,7 +347,15 @@ a {
 
 /* background color for dropdown */
 .dropdown-content a:hover {
-background-color: #242424;
+    background-color: #242424;
+    border-bottom: 1px solid #1ed760;
+    padding-bottom: 3px;
+}
+
+.dropdown-content #logout:hover {
+    color: #f32121;
+    background-color: #242424;
+    border: none;
 }
 
 /* Show the dropdown menu on hover */

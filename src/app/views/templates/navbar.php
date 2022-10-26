@@ -13,6 +13,7 @@
                 <div class="querySearchNavbar">
                     <input type="hidden" name="page" value="1"/>
                     <input type="hidden" name="sort" value="asc"/>
+                    <input type="hidden" name="sortYear" value=""/>
                     <input type="hidden" name="genre" value=""/>
                     <input type="text" name="q" id="q" placeholder="Masukkan judul, tahun, penyanyi" class="searchTerm" autocomplete="off"/>
                     <button type="submit" class="searchButton"><img src="./img/search.png" width="33px" alt="magnifying glass icon"></button>
@@ -28,6 +29,7 @@
                 </nav>
             EOT;
         } else {
+            $username = $_SESSION["username"];
             if ($_SESSION["is_admin"]) {
                 $start .= <<<"EOT"
                     <a href="/users">Daftar User</a>
@@ -42,10 +44,15 @@
                 EOT;
             }
             $end = <<<"EOT"
-            <button class="redButton">
-                <a href="/login/logout">LOGOUT</a>
-            </button>
+            <div class="dropdown username">
+                <button class="dropbtn" id="usernamebtn">Hi, $username!
+                </button>
+                <div class="dropdown-content">
+                    <a href="/login/logout" id="logout">Log out</a>
+                </div>
             </div>
+            </div>
+            </nav>
             EOT;
         }
         
