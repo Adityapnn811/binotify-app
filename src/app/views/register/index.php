@@ -5,13 +5,13 @@
     <input type="text" name="username" require>
     <br>
     Email:<br>
-    <input type="text" name="email">
+    <input type="text" name="email" require>
     <br><br>
     Password:<br>
-    <input type="password" name="password">
+    <input type="password" name="password" require>
     <br><br>
     Confirm Password:<br>
-    <input type="password" name="confirm_password">
+    <input type="password" name="confirm_password" require>
     <br><br>
     <button type="submit" value="Submit" id="registerButton">Register</button>
     </form> 
