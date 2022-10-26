@@ -9,25 +9,40 @@
 
         // Tambahin page/api di bawah
         function signup(){
-            $user_name=$_POST['user_name'];
-            $email_id=$_POST['email_id'];
+            $username=$_POST['username'];
+            $email=$_POST['email'];
             $password=$_POST['password'];
 
-            $count=$this->model("Register_model")->check_user($user_name,$email_id);
+            $count=$this->model("Register_model")->check_user($username,$email);
 
             if($count > 0){
-                echo 'This User Already Exists';
+                $data = array(
+                    'status' => '400',
+                    'error_msg' => 'username already exist',
+                );
             }else{
                 $data = array(
-                'id' =>null,
-                'user_name' =>$_POST['user_name'],
-                'email_id' =>$_POST['email_id'],
-                'password' =>$_POST['password']
+                    'username' =>$_POST['username'],
+                    'email' =>$_POST['email'],
+                    'password' =>$_POST['password'],
+                    'status' => '500',
+                    'error_msg' => '',
                 );
-                $this->model->insert_user($data);
+
+                $success = $this->model("Register_model")->insert_user($data);
+
+                if($success){
+                    $data["status"] = 200;
+                }else{
+                    $data["status"] = 500;
+                    $data["error_msg"] = "gagal register";
+                }
             }
-            header('location:index');
-            }
+
+            $this->view('templates/headerRegister', $data);
+            $this->view('register/index', $data);
+            $this->view('templates/footer');
+        }
 
     }
 

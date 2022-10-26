@@ -1,5 +1,6 @@
 <div class="wrapper">
     <div class="floating-box">
+    <a href="/home">SPOTIFY</a>
     <form name="form1" method="post" action="/login/run">
     <label for="uname">User Name</label>
     <input type="text" id="user_name" name="user_name"><br><br>
