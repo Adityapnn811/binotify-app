@@ -3,9 +3,9 @@
         // method default adalah index (harus ada)
         public function index($id = 10){
             $data["id"] = $id;
-            $this->view('templates/header');
+            $this->view('templates/headerWithoutBody');
             $this->view('song/index', $data);
-            $this->view('templates/footer');
+            $this->view('templates/footerWithoutBody');
         }
 
         // Tambahin page/api di bawah

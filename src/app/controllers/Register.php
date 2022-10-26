@@ -2,7 +2,7 @@
     class Register extends Controller {
         // method default adalah index (harus ada)
         public function index(){
-            $this->view('templates/header');
+            $this->view('templates/headerRegister');
             $this->view('register/index');
             $this->view('templates/footer');
         }
@@ -52,6 +52,16 @@
             $this->view('templates/headerRegister', $data);
             $this->view('register/index', $data);
             $this->view('templates/footer');
+        }
+
+        public function checkUsername($username) {
+            $data["count"] = $this->model("User_model")->checkUsername($username);
+            $this->view('register/checkUsername', $data);
+        }
+
+        public function checkEmail($email) {
+            $data["count"] = $this->model("User_model")->checkEmail($email);
+            $this->view('register/checkEmail', $data);
         }
 
     }

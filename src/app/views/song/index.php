@@ -1,4 +1,5 @@
 <?php
+    require_once '../app/views/templates/navbar.php';
     $id = $data["id"];
     $body = <<<"EOT"
             <body onload="loadData($id)">
@@ -8,9 +9,9 @@
                 </div>
             </body>
             EOT;
+    echo navbar();
     echo $body;
 ?>
-
 <script type="text/javascript">
     function loadData(id) {
         // Masukkin xml di sini
