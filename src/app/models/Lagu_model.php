@@ -56,5 +56,17 @@
             $result = $this->db->allResult();
             return $result;
         }
+
+        public function getSongsByAlbumId($page, $id, $recordPerPage = 10) {
+            $query = "SELECT * FROM $this->table WHERE album_id = :id";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            $totalRecord = count($result);
+            $maxPage = (int) ceil($totalRecord / $recordPerPage);
+            $offset = $recordPerPage * ($page - 1);
+            $paginatedRes = array_slice($result, $offset, $recordPerPage);
+            return array($paginatedRes, $maxPage);
+        }
     }
 ?>
