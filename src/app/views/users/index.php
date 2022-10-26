@@ -1,5 +1,9 @@
-<?php require_once "../app/views/templates/paginationButton.php" ?>
+<?php 
+    require_once "../app/views/templates/paginationButton.php";
+    require_once '../app/views/templates/navbar.php';
+?>
 
+<?= navbar() ?>
 <body onload="loadData()">
     <div class="cardContainer">
         <h2>Daftar User</h2>
