@@ -433,7 +433,7 @@ a {
     max-height: 48px;
     max-width: 48px;
     height: auto;
-    width: auto; 
+    width: auto;
     color: white;
 }
 
@@ -447,10 +447,93 @@ a {
     color: white;
     border: none;
 }
+
 /* Untuk main body */
 .main-body {
     display: flex;
     flex-direction: column;
     width: 85%;
     margin-left: 15%;
+}
+
+/* Song Controller */
+
+.infoContainer,
+.coverImg,
+.detailContainer,
+.songGenre,
+.title,
+.songAlbum,
+.minuteContainer {
+    margin: 0;
+}
+
+.mediaContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(#1fdf64, rgb(18, 18, 18));
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin-top: 2rem;
+}
+
+.coverImg {
+    object-fit: fill;
+    margin: 1rem;
+    width: 10rem;
+    height: 10rem;
+    box-shadow: 0 0.1rem 1rem rgb(0 0 0 / 50%);
+}
+
+.detailContainer,
+.playerContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.detailContainer {
+    margin: 2rem 0 0 0;
+}
+
+.songGenre {
+    font-size: 0.4rem;
+}
+
+.songAlbum {
+    color: #b3b3b3;
+    font-size: 0.4rem;
+    display: none;
+}
+
+.songAlbum:hover {
+    color: white;
+    font-size: 0.5rem;
+    translate: 0.2rem;
+    transition: 0.1s ease-in-out;
+}
+
+.minuteDetail {
+    margin: 0 2rem 0 0;
+}
+
+.minuteContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.songPlayer {
+    color: #1ed760;
+    margin: 0 0 0 1rem;
+    width: 10rem;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-panel {
+    background-color: #1ed760;
+    color: #1ed760;
 }

@@ -1,31 +1,56 @@
 <?php
-    require_once "../app/views/templates/laguCard.php";
-    require_once "../app/views/templates/paginationButton.php";
-    require_once '../app/views/templates/navbar.php';
-    require_once '../app/views/templates/sidebar.php';
+require_once "../app/views/templates/laguCard.php";
+require_once "../app/views/templates/paginationButton.php";
+require_once '../app/views/templates/navbar.php';
+require_once '../app/views/templates/sidebar.php';
 ?>
 <?php
-    $id = $data["id"];
-    $body = <<<"EOT"
+$id = $data["id"];
+$body = <<<"EOT"
             <body onload="loadData($id)">
-            <div class="main-body">
+                <div class="main-body">
     EOT;
-    $body_end = <<<"EOT"
-                <div class="cardContainer">
-                    <h2>Album</h2>
-                    <table id="detilAlbum"></table>
-                    <h2>Songs</h2>
-                    <table id="daftarLagu"></table>
-                </div>
-            </div>
-            </body>
+$body_end = <<<"EOT"
+                    <div class="mediaContainer">
+                        <div class="infoContainer">
+                            <div class="playerContainer">
+                                <img id="imgCover" alt="cover album" class="coverImg">
+                                <audio id="playerLagu" class="songPlayer" preload="auto" controls></audio>
+                            </div>
+                            <div class="detailContainer">
+                                <h1 id="judul" class="title"></h1>
+                                <div class="minuteContainer">
+                                    <h6 id="penyanyi" class="minuteDetail"></h6>
+                                    <h6 id="jumlahLagu" class="minuteDetail"></h6>
+                                    <h6 id="durasi" class="minuteDetail"></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             EOT;
-    echo sidebar();
-    echo $body;
-    echo navbar("..");
-    echo $body_end;
+echo sidebar();
+echo $body;
+echo navbar("..");
+echo $body_end;
 ?>
 
+        <div class="cardContainer">
+            <?php if (empty($data["songs"])) : ?>
+                <h1>Tidak ada hasil pencarian</h1>
+            <?php else : ?>
+                <?php foreach ($data["songs"][0] as $idx => $info) : ?>
+                    <?= laguCard($info["song_id"], $info["Judul"], $info["Penyanyi"], substr($info["Tanggal_terbit"], 0, 4), $info["Genre"], $info["Image_path"], 1) ?>
+                <?php endforeach; ?>
+                <div class="pagination">
+                    <?php for ($page = 1; $page <= $data["songs"][1]; $page++) : ?>
+                        <?php empty($_POST) ? $currentPage = 1 : $currentPage = (int) $_POST["page"] ?>
+                        <?= paginationSearchButton($_POST, $currentPage, "/search", $page) ?>
+                    <?php endfor; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</body>
 <script type="text/javascript">
     function loadData(id) {
         // Get Album Details
@@ -52,33 +77,35 @@
                 // ambil data html dari response di sini
                 const res2 = JSON.parse(this.responseText);
                 // tambahin row di sini
-                setSongs(res2[0]);
+                setSongs(res2[0], res2[2]);
             } else if (this.status == 404) {
                 document.getElementById("daftarLagu").innerHTML = "<tr><th>No Songs Found</th></tr>";
             }
         };
-        xhttp2.open("GET", "/album/getSongsByAlbumId/1/" + id);
+        xhttp2.open("GET", "/album/getSongsByAlbumId/" + id + "/1");
         xhttp2.send();
     }
 
     function setData(data) {
-        let table = "<tr><th>Judul</th><th>"          + data[0].Judul          + "</th></tr>"
-                  + "<tr><th>Penyanyi</th><th>"       + data[0].Penyanyi       + "</th></tr>"
-                  + "<tr><th>Total Durasi</th><th>"   + data[0].Total_duration + "</th></tr>"
-        document.getElementById("detilAlbum").innerHTML = table;
+        document.getElementById("imgCover").src = "." + data[0].Image_path;
+        document.getElementById("judul").innerHTML = data[0].Judul;
+        document.getElementById("penyanyi").innerHTML = data[0].Penyanyi;
+        document.getElementById("durasi").innerHTML = toMinutes(data[0].Total_duration);
     }
-    
-    function setSongs(data) {
-        let table="<tr><th>User ID</th><th>Username</th><th>Email</th></tr>";
-        for (datum in data) {
-            table += "<tr><td>" +
-            datum.user_id +
-            "</td><td>" +
-            datum.username +
-            "</td><td>" +
-            datum.email +
-            "</td></tr>";
-        }
-        document.getElementById("daftarLagu").innerHTML = table;
+
+    function setSongs(data, count) {
+        document.getElementById("jumlahLagu").innerHTML = count + " Songs";
+        console.log(data[0].Audio_path);
+        document.getElementById("playerLagu").src = "." + data[0].Audio_path;
+    }
+
+    function toMinutes(time) {
+        var mins = (~~(time / 60));
+        var secs = (time - mins * 60).toFixed().toString().padStart(2, "0");
+        return `${mins}:${secs}`;
+    }
+
+    function goToSongPage(id) {
+        window.location.href = "/song/" + id;
     }
 </script>

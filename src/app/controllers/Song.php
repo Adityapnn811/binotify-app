@@ -13,5 +13,10 @@
             $data["song"] = $this->model("Lagu_model")->getSongById($id);
             $this->view("song/getSongById", $data);
         }
+
+        public function getAlbumNameById($id) {
+            $data["name"] = $this->model("Album_model")->getAlbumNameById($id);
+            $this->view("song/getAlbumNameById", $data);
+        }
     }
 ?>
