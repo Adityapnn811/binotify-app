@@ -115,19 +115,29 @@ if (!$edit) {
         <?php endif; ?>
     </script>
 <?php else : ?>
-    <form class="formEdit" method="post" action="/song/postSongUpdate">
-        <div class="formContainer">
-            <h1 id="labelForm">Edit Lagu</h1>
-            <label for="Judul" id="labelJudul">Judul</label>
-            <input type="text" class="inputField" name="Judul" id="inputJudul">
-            <label for="Tanggal" id="labelTanggal">Tanggal Terbit</label>
-            <input type="text" class="inputField" name="Tanggal" id="inputTanggal">
-            <label for="Genre" id="labelGenre">Genre</label>
-            <input type="text" class="inputField" name="Genre" id="inputGenre">
-            <input type="hidden" name="id" id="id">
-            <input type="submit" class="saveEdit" value="Save" id="submitButton">
+    <div class="formEdit">
+        <form method="post" action="/song/postSongUpdate">
+            <div class="formContainer">
+                <h1 id="labelForm">Edit Lagu</h1>
+                <label for="Judul" id="labelJudul">Judul</label>
+                <input type="text" class="inputField" name="Judul" id="inputJudul">
+                <label for="Tanggal" id="labelTanggal">Tanggal Terbit</label>
+                <input type="text" class="inputField" name="Tanggal" id="inputTanggal">
+                <label for="Genre" id="labelGenre">Genre</label>
+                <input type="text" class="inputField" name="Genre" id="inputGenre">
+                <input type="hidden" name="id" id="id">
+                <input type="submit" class="saveEdit" value="Save" id="submitButton">
+            </div>
+        </form>
+        <div class="dropSong" id="dropArea">
+            <form action="/song/uploadSongById" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="fileSong" accept="audio/*" onchange="handleFiles(this.files)">
+                <label id="selector" for="fileSong">Select Songs</label>
+            </form>
+            <h6 class="dragDetail">or Drag and Drop Here</h6>
+            <div id="gallery"></div>
         </div>
-    </form>
+    </div>
     </body>
     <script type="text/javascript">
         function loadData(id) {
@@ -165,5 +175,84 @@ if (!$edit) {
             document.getElementById("inputTanggal").value = data.Tanggal_terbit;
             document.getElementById("inputGenre").value = data.Genre;
         };
+
+        // Drag and Drop
+        const id = <?= $id ?>;
+        let dropArea = document.getElementById("dropArea");
+        var options = ['dragenter', 'dragover', 'dragleave', 'drop'];
+
+
+        options.slice(0, 2).forEach(e => {
+            dropArea.addEventListener(e, e => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropArea.style.borderColor = "#22f66c";
+            });
+        });
+
+        options.slice(2).forEach(e => {
+            dropArea.addEventListener(e, e => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropArea.style.borderColor = "#117b36";
+            });
+        });
+
+        dropArea.addEventListener('drop', dropFile)
+
+        function dropFile(e) {
+            var dt = e.dataTransfer;
+            var files = dt.files;
+            handleFiles(files);
+        }
+
+        function handleFiles(files) {
+            var file = files[0];
+            uploadFile(file);
+            // previewFile(file);
+        }
+
+        function previewFile(file) {
+            let reader = new FileReader();
+            reader.readAsArrayBuffer(file);
+            reader.onloadend = function() {
+                var dv = new DataView(this.result);
+                if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
+                    var title = dv.getString(30, dv.tell());
+                    var artist = dv.getString(30, dv.tell());
+                    var album = dv.getString(30, dv.tell());
+                    var year = dv.getString(4, dv.tell());
+                    console.log(title, artist, album, year);
+                } else {
+                    // no ID3v1 data found.
+                }
+                // let img = document.createElement('img');
+                // img.src = reader.result;
+                // document.getElementById('gallery').appendChild(img);
+            }
+        }
+
+        function uploadFile(file) {
+            var formData = new FormData();
+            formData.append('id', id);
+            formData.append('file', file);
+            console.log(formData);
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    // ambil data html dari response di sini
+                    // const res = JSON.parse(this.responseText);
+                    // tambahin row di sini
+                    // setMeta(res[0]);
+                }
+            };
+            xhttp.open("POST", "/song/uploadSongById");
+            xhttp.send(formData);
+        }
+
+        function setMeta(data) {
+            console.log(data);
+        }
     </script>
 <?php endif; ?>

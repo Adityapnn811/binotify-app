@@ -29,5 +29,17 @@
             $data["status"] = $this->model("Lagu_model")->updateSongById($id, $judul, $tanggal, $genre);
             $this->view("song/postSongUpdate", $data);
         }
+
+        public function uploadSongById() {
+            $name = $_FILES["file"]["name"];
+            $tmp = $_FILES["file"]["tmp_name"];
+            $error = $_FILES["file"]["error"];
+            if ($error === 0) {
+                move_uploaded_file($tmp, "./songs/".$name);
+            }
+            $getID3 = new getID3;
+            $data["test"] = $getID3->analyze(getcwd()."/songs/".$name);
+            $this->view("song/uploadSongById", $data);
+        }
     }
 ?>
