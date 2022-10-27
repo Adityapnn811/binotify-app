@@ -454,7 +454,7 @@ a {
     flex-direction: column;
     width: 85%;
     margin-left: 15%;
-    background-color: rgb(18, 18, 18);
+    background-color: linear-gradient(#29454c, 30%, #121212);
 }
 
 /* Song Controller */
