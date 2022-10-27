@@ -1,3 +1,16 @@
+# Website Pemutar Lagu Binotify - Monolithic PHP & Vanilla Web Application
+
+## Daftar Isi
+- [Deskripsi](#deskripsi)
+- [Requirements](#requirements)
+- [Cara instalasi](#cara-instalasi)
+- [Cara menjalankan server](#cara-menjalankan-server)
+- [Screenshot](#screenshot)
+- [Pembagian tugas](#pembagian-tugas)
+
+## Deskripsi
+Wesbite binotify merupakan sebuah website pemutar lagu yang dibuat menggunakan bahasa pemrograman PHP sebagai backend dan HTML, CSS, Javascript sebagai frontend. Website ini dibuat tanpa menggunakan framework. Website ini dapat melakukan login dan register sebagai pengguna biasa. Pengguna terbagi menjadi tiga, yaitu pengguna yang terautentikasi, admin, dan pengguna yang tidak terautentikasi. Ketika masuk sebagai admin, maka website akan menampilkan beberapa menu yang hanya bisa diakses oleh admin seperti daftar users, tambah lagu/album, dan edit lagu/album. Perbedaan antara pengguna yang terautentikasi dan tidak terautentikasi adalah pengguna yang tidak terautentikasi hanya bisa memainkan lagu sebanyak 3 kali per hari. 
+
 ## Requirements
 1. Extension sql aktif
 2. PHP versi 8
