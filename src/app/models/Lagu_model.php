@@ -62,7 +62,7 @@
             return $result;
         }
 
-        public function getSongsByAlbumId($page, $id, $recordPerPage = 10) {
+        public function getSongsByAlbumId($id, $page, $recordPerPage = 10) {
             $query = "SELECT * FROM $this->table WHERE album_id = :id";
             $this->db->query($query);
             $this->db->bind('id', $id);
@@ -71,8 +71,9 @@
             $maxPage = (int) ceil($totalRecord / $recordPerPage);
             $offset = $recordPerPage * ($page - 1);
             $paginatedRes = array_slice($result, $offset, $recordPerPage);
-            return array($paginatedRes, $maxPage);
+            return array($paginatedRes, $maxPage, $totalRecord);
         }
+
         public function showRecentUploadedSong($recordPerPage = 10) {
             if (count($_POST) === 0) {
                 $q ="";

@@ -7,21 +7,19 @@
             <div class="main-body">
     EOT;
     $body_end = <<<"EOT"
-                    <div class="mediaContainer">
-                        <div class="infoContainer">
-                            <div class="playerContainer">
-                                <img id="imgCover" alt="cover lagu" class="coverImg">
-                                <audio id="playerLagu" class="songPlayer" preload="auto" controls></audio>
-                            </div>
-                            <div class="detailContainer">
-                                <h6 id="genreLagu" class="songGenre"></h6>
-                                <h1 id="judulLagu" class="songTitle"></h1>
-                                <div class="minuteContainer">
-                                    <h6 id="penyanyi" class="minuteDetail"></h6>
-                                    <h6 id="tanggalTerbit" class="minuteDetail"></h6>
-                                    <h6 id="durasi" class="minuteDetail"></h6>
-                                </div>
-                                <h6 id="albumLagu" class="songAlbum"></h6>
+                <div class="mediaContainer">
+                    <div class="infoContainer">
+                        <div class="playerContainer">
+                            <img id="imgCover" alt="cover lagu" class="coverImg">
+                            <audio id="playerLagu" class="songPlayer" preload="auto" controls></audio>
+                        </div>
+                        <div class="detailContainer">
+                            <h6 id="genreLagu" class="songGenre"></h6>
+                            <h1 id="judulLagu" class="title"></h1>
+                            <div class="minuteContainer">
+                                <h6 id="penyanyi" class="minuteDetail"></h6>
+                                <h6 id="tanggalTerbit" class="minuteDetail"></h6>
+                                <h6 id="durasi" class="minuteDetail"></h6>
                             </div>
                         </div>
                     </div>

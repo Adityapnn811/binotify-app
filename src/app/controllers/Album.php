@@ -1,7 +1,8 @@
 <?php
     class Album extends Controller {
         // method default adalah index (harus ada)
-        public function index($id = 10){
+        public function index($id) {
+            $data["songs"] = $this->model("Lagu_model")->getSongsByAlbumId($id, 1);
             $data["id"] = $id;
             $this->view('templates/headerWithoutBody');
             $this->view('album/index', $data);
@@ -14,7 +15,7 @@
             $this->view("album/getAlbumById", $data);
         }
 
-        public function getSongsByAlbumId($page, $id) {
+        public function getSongsByAlbumId($id, $page) {
             $data["songs"] = $this->model("Lagu_model")->getSongsByAlbumId($id, $page);
             $this->view("album/getSongsByAlbumId", $data);
         }
