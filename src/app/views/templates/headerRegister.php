@@ -1,5 +1,9 @@
 <?php
     $error = "";
+    if (isset($_SESSION["username"])) {
+        header('location: /home');
+        die();
+    }
     if (!empty($data)) {
         // Register button clicked
         // cek apakah berhasil
