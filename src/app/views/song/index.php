@@ -21,6 +21,7 @@
                                 <h6 id="tanggalTerbit" class="minuteDetail"></h6>
                                 <h6 id="durasi" class="minuteDetail"></h6>
                             </div>
+                            <h6 id="albumLagu" class="songAlbum"></h6>
                         </div>
                     </div>
                 </div>
