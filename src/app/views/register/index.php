@@ -1,23 +1,54 @@
-<div>
-<a href="/home">SPOTIFY</a>
-    <form method="post" action="/register/signup">
-    Username:<br>
-    <input type="text" name="username" id="username" class="" required onkeyup="processUsernameChange(this.value)">
-    <br>
-    Email:<br>
-    <input type="text" name="email" id="email" class="" required onkeyup="processEmailChange(this.value)">
-    <br><br>
-    Password:<br>
-    <input type="password" name="password" required>
-    <br><br>
-    Confirm Password:<br>
-    <input type="password" name="confirm_password" required>
-    <br><br>
-    <button type="submit" value="Submit" id="registerButton">Register</button>
-    </form> 
-    <p style="color:blue;">
-        <?= !empty($data) ? $data["error_msg"] : "" ?> 
-    </p>
+<div class="login-background">
+    <div class="login-title-container">
+        <img src="img/logo.png" class="login-logo">
+        <a class="login-title" href="/home" > BINOTIFY </a>
+    </div>
+        <div class="login-container">
+            <div class="login-form-container">
+                <?php if (!empty($data)) : ?>
+                    <p class="login-error-msg">
+                        <?=$data["error_msg"]?>
+                    </p >
+                <?php endif; ?>
+
+
+                <form method="post" action="/register/signup" class="login-form">
+                    <div class="login-input">
+                        <label class="login-input-text" for="username" required> Username </label>
+                        <input class="login-input-box" placeholder="Enter your username" type="text" name="username" id="username" required onkeyup="processUsernameChange(this.value)">
+                    </div>
+                    
+                    <div class="login-input">
+                        <label class="login-input-text" requires> Email </label>
+                        <input class="login-input-box" placeholder="Enter your email" type="text" name="email" id="email" class="" required onkeyup="processEmailChange(this.value)">
+                    </div>
+
+                    <div class="login-input">
+                        <label class="login-input-text" required> Password </label>
+                        <input class="login-input-box" placeholder="Enter your password" type="password" name="password" required>
+                    </div>
+
+                    <div class="login-input">
+                        <label class="login-input-text" required> Confirm Password </label>
+                        <input class="login-input-box" placeholder="Enter your password again" type="password" name="confirm_password" required>
+                    </div>
+
+                    
+                </form> 
+                <div class="register-button-container">
+                    <button class="register-button" type="submit" value="Submit" id="registerButton"> SIGN UP </button>
+                </div>
+
+                <p class="register-login-button">
+                    Have an account?
+                    <a class="register-href" href="/login">Login</a>
+                </p>
+
+
+            </div>
+ 
+    </div>
+
 </div>
 
 <script type="text/javascript">

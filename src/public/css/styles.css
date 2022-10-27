@@ -369,13 +369,33 @@ a {
 .greenBorder {
     outline: none;
     border: 2px solid #1ed760;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: none;
+    letter-spacing: normal;
+    width: 100%;
+    box-sizing: border-box;
+    padding:13px;
 }
 
 .redBorder {
     outline: none;
     border: 2px solid #fb5252;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: none;
+    letter-spacing: normal;
+    width: 100%;
+    box-sizing: border-box;
+    padding:13px;
 }
 
 .noBorder {
-    border: none;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: none;
+    letter-spacing: normal;
+    width: 100%;
+    box-sizing: border-box;
+    padding:13px;
 }

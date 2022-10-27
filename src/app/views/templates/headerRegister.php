@@ -25,5 +25,7 @@
         <!-- Masukin StyleSheet CSS di sini -->
         <link rel="stylesheet" href="/css/styles.css" >
         <link rel="stylesheet" href="/css/search.css" >
+        <link rel="stylesheet" href="/css/login.css" >
+        <link rel="stylesheet" href="/css/register.css" >
     </head>
     <body>
