@@ -513,6 +513,7 @@ a {
 }
 
 .songAlbum:hover {
+    cursor: pointer;
     color: white;
     font-size: 0.5rem;
     translate: 0.2rem;
@@ -538,4 +539,110 @@ audio::-webkit-media-controls-play-button,
 audio::-webkit-media-controls-panel {
     background-color: #1ed760;
     color: #1ed760;
+}
+
+#inputJudul,
+#inputTanggal,
+#inputGenre {
+    font-size: 0.75rem;
+    height: 1.5rem;
+    border-radius: 1rem;
+    padding-left: 1rem;
+}
+
+#inputJudul:focus,
+#inputTanggal:focus,
+#inputGenre:focus {
+    outline: #1ed760 solid 0.1rem;
+}
+
+#labelForm,
+#submitButton {
+    margin: 0;
+    grid-column: 1 / span 2;
+    place-self: center;
+}
+
+#labelJudul {
+    grid-area: "A";
+}
+
+#inputJudul {
+    grid-area: "B";
+}
+
+#labelTanggal {
+    grid-area: "C";
+}
+
+#inputTanggal {
+    grid-area: "D";
+}
+
+#labelGenre {
+    grid-area: "E";
+}
+
+#inputGenre {
+    grid-area: "F";
+}
+
+.formContainer {
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #2a2a2a;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+    grid-template-areas:
+        "A B"
+        "C D"
+        "E F";
+    grid-area: "A";
+}
+
+.formEdit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "A B";
+}
+
+.editButton {
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    bottom: 1rem;
+    right: 1rem;
+    position: absolute;
+    background-color: #dc143c;
+    box-shadow: 0 0.2rem 0 #ac102f;
+    border-radius: 0.5rem;
+}
+
+.editButton:hover {
+    cursor: pointer;
+    translate: 0 0.2rem;
+    background-color: #ff1746;
+    box-shadow: none;
+    transition: 0.1s ease-in-out;
+}
+
+.saveEdit {
+    font-size: 1rem;
+    border: none;
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    background-color: #1ed760;
+    box-shadow: 0 0.2rem 0 #117b36;
+    border-radius: 0.5rem;
+}
+
+.saveEdit:hover {
+    cursor: pointer;
+    translate: 0 0.2rem;
+    background-color: #22f66c;
+    box-shadow: none;
+    transition: 0.1s ease-in-out;
 }

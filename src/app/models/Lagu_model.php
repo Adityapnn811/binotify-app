@@ -74,6 +74,17 @@
             return array($paginatedRes, $maxPage, $totalRecord);
         }
 
+        public function updateSongById($id, $judul, $tanggal, $genre) {
+            $query = "UPDATE $this->table SET Judul = :judul, Tanggal_terbit = :tanggal, Genre = :genre WHERE song_id = :id";
+            $this->db->query($query);
+            $this->db->bind('judul', $judul);
+            $this->db->bind('tanggal', $tanggal);
+            $this->db->bind('genre', $genre);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            return $result;
+        }
+
         public function showRecentUploadedSong($recordPerPage = 10) {
             if (count($_POST) === 0) {
                 $q ="";
@@ -118,6 +129,5 @@
 
             return array ($paginatedRes, $maxPage);
         }
-
     }
 ?>
