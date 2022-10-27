@@ -1,16 +1,22 @@
 <?php
     require_once '../app/views/templates/navbar.php';
+    require_once '../app/views/templates/sidebar.php';
     $id = $data["id"];
     $body = <<<"EOT"
             <body onload="loadData($id)">
+            <div class="main-body">
+    EOT;
+    $body_end = <<<"EOT"
                 <div class="cardContainer">
                     <h2>Lagu</h2>
                     <table id="detilLagu"></table>
                 </div>
             </body>
             EOT;
-    echo navbar();
+    echo sidebar();
     echo $body;
+    echo navbar("..");
+    echo $body_end;
 ?>
 <script type="text/javascript">
     function loadData(id) {

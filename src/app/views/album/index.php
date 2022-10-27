@@ -1,20 +1,29 @@
 <?php
     require_once "../app/views/templates/laguCard.php";
     require_once "../app/views/templates/paginationButton.php";
+    require_once '../app/views/templates/navbar.php';
+    require_once '../app/views/templates/sidebar.php';
 ?>
 <?php
     $id = $data["id"];
     $body = <<<"EOT"
             <body onload="loadData($id)">
+            <div class="main-body">
+    EOT;
+    $body_end = <<<"EOT"
                 <div class="cardContainer">
                     <h2>Album</h2>
                     <table id="detilAlbum"></table>
                     <h2>Songs</h2>
                     <table id="daftarLagu"></table>
                 </div>
+            </div>
             </body>
             EOT;
+    echo sidebar();
     echo $body;
+    echo navbar("..");
+    echo $body_end;
 ?>
 
 <script type="text/javascript">
