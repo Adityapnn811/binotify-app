@@ -1,20 +1,33 @@
 <?php
-    require_once '../app/views/templates/navbar.php';
+require_once '../app/views/templates/navbar.php';
 ?>
-
 <?= navbar() ?>
 <?php
-    $id = $data["id"];
-    $body = <<<"EOT"
+$id = $data["id"];
+$body = <<<"EOT"
             <body onload="loadData($id)">
-                <div class="cardContainer">
-                    <h2>Lagu</h2>
-                    <table id="detilLagu"></table>
+                <div class="songContainer">
+                    <div class="infoContainer">
+                        <div class="playerContainer">
+                            <img id="imgLagu" alt="cover lagu" class="laguImg">
+                            <audio id="playerLagu" class="songPlayer" preload="auto" controls muted loop autoplay></audio>
+                        </div>
+                        <div class="detailContainer">
+                            <h6 id="genreLagu" class="songGenre"></h6>
+                            <h1 id="judulLagu" class="songTitle"></h1>
+                            <div class="minuteContainer">
+                                <h6 id="penyanyi" class="minuteDetail"></h6>
+                                <h6 id="tanggalTerbit" class="minuteDetail"></h6>
+                                <h6 id="durasi" class="minuteDetail"></h6>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </body>
             EOT;
-    echo $body;
+echo $body;
 ?>
+<!-- <table id="detilLagu"></table> -->
 
 <script type="text/javascript">
     function loadData(id) {
@@ -27,7 +40,7 @@
                 // tambahin row di sini
                 setData(res);
             } else if (this.status == 404) {
-                const elem = document.getElementsByClassName("cardContainer")[0];
+                const elem = document.getElementsByClassName("laguContainer")[0];
                 elem.parentNode.removeChild(elem);
                 document.body.appendChild(document.createElement("h1").appendChild(document.createTextNode("404: Not Found")));
             }
@@ -37,11 +50,19 @@
     }
 
     function setData(data) {
-        let table = "<tr><th>Judul</th><th>"          + data[0].Judul          + "</th></tr>"
-                  + "<tr><th>Penyanyi</th><th>"       + data[0].Penyanyi       + "</th></tr>"
-                  + "<tr><th>Tanggal Terbit</th><th>" + data[0].Tanggal_terbit + "</th></tr>"
-                  + "<tr><th>Genre</th><th>"          + data[0].Genre          + "</th></tr>"
-                  + "<tr><th>Duration</th><th>"       + data[0].Duration       + "</th></tr>";
-        document.getElementById("detilLagu").innerHTML = table;
+        console.log(data);
+        document.getElementById("imgLagu").src = "." + data[0].Image_path;
+        document.getElementById("genreLagu").innerHTML = data[0].Genre;
+        document.getElementById("judulLagu").innerHTML = data[0].Judul;
+        document.getElementById("penyanyi").innerHTML = data[0].Penyanyi;
+        document.getElementById("tanggalTerbit").innerHTML = data[0].Tanggal_terbit;
+        document.getElementById("durasi").innerHTML = toMinutes(data[0].Duration);
+        document.getElementById("playerLagu").src = "." + data[0].Audio_path;
+    }
+
+    function toMinutes(time) {
+        var mins = (~~(time / 60));
+        var secs = (time - mins * 60).toFixed().toString().padStart(2, "0");
+        return `${mins}:${secs}`;
     }
 </script>
