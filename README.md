@@ -69,6 +69,6 @@ extension=mysqli
 - Tambah Album/Lagu: 13520129
 
 ## Author
-13520049 - Aditya Prawira Nugroho
-13520096 - Monica Adelia
-13520129 - Nathanael Santoso
+- 13520049 - Aditya Prawira Nugroho
+- 13520096 - Monica Adelia
+- 13520129 - Nathanael Santoso
