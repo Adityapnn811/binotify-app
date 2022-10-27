@@ -34,22 +34,22 @@ echo navbar("..");
 echo $body_end;
 ?>
 
-        <div class="cardContainer">
-            <?php if (empty($data["songs"])) : ?>
-                <h1>Tidak ada hasil pencarian</h1>
-            <?php else : ?>
-                <?php foreach ($data["songs"][0] as $idx => $info) : ?>
-                    <?= laguCard($info["song_id"], $info["Judul"], $info["Penyanyi"], substr($info["Tanggal_terbit"], 0, 4), $info["Genre"], $info["Image_path"], 1) ?>
-                <?php endforeach; ?>
-                <div class="pagination">
-                    <?php for ($page = 1; $page <= $data["songs"][1]; $page++) : ?>
-                        <?php empty($_POST) ? $currentPage = 1 : $currentPage = (int) $_POST["page"] ?>
-                        <?= paginationSearchButton($_POST, $currentPage, "/search", $page) ?>
-                    <?php endfor; ?>
-                </div>
-            <?php endif; ?>
+<div class="cardContainer">
+    <?php if (empty($data["songs"])) : ?>
+        <h1>Tidak ada hasil pencarian</h1>
+    <?php else : ?>
+        <?php foreach ($data["songs"][0] as $idx => $info) : ?>
+            <?= laguCard($info["song_id"], $info["Judul"], $info["Penyanyi"], substr($info["Tanggal_terbit"], 0, 4), $info["Genre"], $info["Image_path"], 1) ?>
+        <?php endforeach; ?>
+        <div class="pagination">
+            <?php for ($page = 1; $page <= $data["songs"][1]; $page++) : ?>
+                <?php empty($_POST) ? $currentPage = 1 : $currentPage = (int) $_POST["page"] ?>
+                <?= paginationSearchButton($_POST, $currentPage, "/search", $page) ?>
+            <?php endfor; ?>
         </div>
-    </div>
+    <?php endif; ?>
+</div>
+</div>
 </body>
 <script type="text/javascript">
     function loadData(id) {
@@ -61,10 +61,17 @@ echo $body_end;
                 const res1 = JSON.parse(this.responseText);
                 // tambahin row di sini
                 setData(res1);
-            } else if (this.status == 404) {
-                const elem = document.getElementsByClassName("cardContainer")[0];
-                elem.remove();
-                document.body.appendChild(document.createElement("h1").appendChild(document.createTextNode("404: Not Found")));
+            } else if (this.readyState == 4 && this.status == 404) {
+                const elem = document.getElementsByClassName("mediaContainer")[0];
+                const parent = document.getElementsByClassName("main-body")[0];
+                parent.removeChild(elem);
+
+                var notFound = document.createElement("div");
+                notFound.innerHTML = "404: Album Not Found";
+                notFound.style.position = "absolute";
+                notFound.style.left = "50%"
+                notFound.style.top = "50%"
+                parent.appendChild(notFound);
             }
         };
         xhttp1.open("GET", "/album/getAlbumById/" + id);
