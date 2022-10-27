@@ -455,6 +455,7 @@ a {
     flex-direction: column;
     width: 85%;
     margin-left: 15%;
+    background-color: rgb(18, 18, 18);
 }
 
 /* Song Controller */
@@ -479,8 +480,8 @@ a {
 .infoContainer {
     display: flex;
     flex-direction: row;
-    width: 80%;
     margin-top: 2rem;
+    width: 100%
 }
 
 .coverImg {
