@@ -365,6 +365,21 @@ a {
     display: block;
 }
 
+/* Border untuk username dan email */
+.greenBorder {
+    outline: none;
+    border: 2px solid #1ed760;
+}
+
+.redBorder {
+    outline: none;
+    border: 2px solid #fb5252;
+}
+
+.noBorder {
+    border: none;
+}
+
 /* Song Controller */
 
 .infoContainer,
@@ -429,4 +444,3 @@ audio::-webkit-media-controls-play-button,
 audio::-webkit-media-controls-panel {
     background-color: #1ed760;
     color: #1ed760;
-}

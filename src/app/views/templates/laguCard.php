@@ -4,7 +4,7 @@ function laguCard($id= "1", $judul = "Judul", $penyanyi = "penyanyi", $tahun="20
         $img = "./img/laguDefault.jpg";
     }
     $html = <<<"EOT"
-        <div class="laguCard">
+        <div class="laguCard" onclick="goToSongPage($id)">
             <div class="imgCardContainer">
                 <img src="$img" alt="cover lagu" class="laguImg">
             </div>
@@ -23,3 +23,4 @@ function laguCard($id= "1", $judul = "Judul", $penyanyi = "penyanyi", $tahun="20
    echo $html;
 }
 ?>
+

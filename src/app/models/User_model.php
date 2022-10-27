@@ -16,5 +16,19 @@
             $paginatedRes = array_slice($result, $offset, $recordPerPage);
             return array($paginatedRes, $maxPage);
         }
+
+        public function checkUsername($username) {
+            $this->db->query("SELECT * FROM $this->table WHERE username = :username");
+            $this->db->bind('username', $username);
+            $this->db->execute();
+            return $this->db->rowCount();
+        }
+
+        public function checkEmail($email) {
+            $this->db->query("SELECT * FROM $this->table WHERE email = :email");
+            $this->db->bind('email', $email);
+            $this->db->execute();
+            return $this->db->rowCount();
+        }
     }
 ?>
