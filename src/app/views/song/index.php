@@ -6,11 +6,11 @@ require_once '../app/views/templates/navbar.php';
 $id = $data["id"];
 $body = <<<"EOT"
             <body onload="loadData($id)">
-                <div class="songContainer">
+                <div class="mediaContainer">
                     <div class="infoContainer">
                         <div class="playerContainer">
-                            <img id="imgLagu" alt="cover lagu" class="laguImg">
-                            <audio id="playerLagu" class="songPlayer" preload="auto" controls muted loop autoplay></audio>
+                            <img id="imgCover" alt="cover lagu" class="coverImg">
+                            <audio id="playerLagu" class="songPlayer" preload="auto" controls></audio>
                         </div>
                         <div class="detailContainer">
                             <h6 id="genreLagu" class="songGenre"></h6>
@@ -20,6 +20,7 @@ $body = <<<"EOT"
                                 <h6 id="tanggalTerbit" class="minuteDetail"></h6>
                                 <h6 id="durasi" class="minuteDetail"></h6>
                             </div>
+                            <h6 id="albumLagu" class="songAlbum"></h6>
                         </div>
                     </div>
                 </div>
@@ -38,7 +39,7 @@ echo $body;
                 // ambil data html dari response di sini
                 const res = JSON.parse(this.responseText);
                 // tambahin row di sini
-                setData(res);
+                setData(res[0]);
             } else if (this.status == 404) {
                 const elem = document.getElementsByClassName("laguContainer")[0];
                 elem.parentNode.removeChild(elem);
@@ -50,19 +51,42 @@ echo $body;
     }
 
     function setData(data) {
-        console.log(data);
-        document.getElementById("imgLagu").src = "." + data[0].Image_path;
-        document.getElementById("genreLagu").innerHTML = data[0].Genre;
-        document.getElementById("judulLagu").innerHTML = data[0].Judul;
-        document.getElementById("penyanyi").innerHTML = data[0].Penyanyi;
-        document.getElementById("tanggalTerbit").innerHTML = data[0].Tanggal_terbit;
-        document.getElementById("durasi").innerHTML = toMinutes(data[0].Duration);
-        document.getElementById("playerLagu").src = "." + data[0].Audio_path;
+        document.getElementById("imgCover").src = "." + data.Image_path;
+        document.getElementById("genreLagu").innerHTML = data.Genre;
+        document.getElementById("judulLagu").innerHTML = data.Judul;
+        document.getElementById("penyanyi").innerHTML = "by " + data.Penyanyi;
+        document.getElementById("tanggalTerbit").innerHTML = data.Tanggal_terbit;
+        document.getElementById("durasi").innerHTML = toMinutes(data.Duration);
+        document.getElementById("playerLagu").src = "." + data.Audio_path;
+
+        const id = data.album_id;
+        if (id !== null) {
+            // Masukkin xml di sini
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // ambil data html dari response di sini
+                    const res = JSON.parse(this.responseText);
+                    // tambahin row di sini
+                    setLink(res[0], id);
+                }
+            };
+            xhttp.open("GET", "/song/getAlbumNameById/" + id);
+            xhttp.send();
+        }
     }
 
     function toMinutes(time) {
         var mins = (~~(time / 60));
         var secs = (time - mins * 60).toFixed().toString().padStart(2, "0");
         return `${mins}:${secs}`;
+    }
+
+    function setLink(data, id) {
+        document.getElementById("albumLagu").innerHTML = "in " + data.Judul;
+        document.getElementById("albumLagu").style.display = "block";
+        document.getElementById("albumLagu").addEventListener("click", function() {
+            window.location.href = "/Album/" + id;
+        });
     }
 </script>
