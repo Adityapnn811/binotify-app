@@ -5,9 +5,9 @@ require_once '../app/views/templates/sidebar.php';
 $id = $data["id"];
 $edit = ($data["edit"] == "edit");
 $body = <<<"EOT"
-                        <body onload="loadData($id)">
-                            <div class="main-body">
-                        EOT;
+            <body onload="loadData($id)">
+                <div class="main-body">
+            EOT;
 echo sidebar();
 echo $body;
 if (!$edit) {
@@ -21,7 +21,13 @@ if (!$edit) {
         <div class="infoContainer">
             <div class="playerContainer">
                 <img id="imgCover" alt="cover lagu" class="coverImg">
-                <audio id="playerLagu" class="songPlayer" preload="auto" controls></audio>
+                <?php if (!isset($_SESSION["username"]) && isset($_SESSION["song_count"]) && $_SESSION["song_count"] > 3) : ?>
+                    <div class="block" id="redirRegis">
+                        <p>Kesempatan Lagu Anda Sudah Habis</p>
+                    </div>
+                <?php else : ?>
+                    <audio id="playerLagu" class="songPlayer" preload="auto" controls></audio>
+                <?php endif; ?>
             </div>
             <div class="detailContainer">
                 <h6 id="genreLagu" class="songGenre"></h6>
@@ -66,6 +72,12 @@ if (!$edit) {
             xhttp.send();
         }
 
+        <?php if (!isset($_SESSION["username"]) && isset($_SESSION["song_count"]) && $_SESSION["song_count"] > 3) : ?>
+            document.getElementById("redirRegis").addEventListener("click", function() {
+                window.location.href = "/register";
+            });
+        <?php endif; ?>
+
         function setData(data) {
             document.getElementById("imgCover").src = "." + data.Image_path;
             document.getElementById("genreLagu").innerHTML = data.Genre;
@@ -74,6 +86,24 @@ if (!$edit) {
             document.getElementById("tanggalTerbit").innerHTML = data.Tanggal_terbit;
             document.getElementById("durasi").innerHTML = toMinutes(data.Duration);
             document.getElementById("playerLagu").src = "." + data.Audio_path;
+
+            <?php if (!isset($_SESSION["username"])) : ?>
+                document.getElementById("playerLagu").addEventListener("ended", function() {
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            // ambil data html dari response di sini
+                            const res = JSON.parse(this.responseText);
+                            // tambahin row di sini
+                            if (res.song_count > 3) {
+                                window.location.href = "/home";
+                            }
+                        }
+                    };
+                    xhttp.open("POST", "/song/increaseSessionSongCount");
+                    xhttp.send();
+                });
+            <?php endif; ?>
 
             const id = data.album_id;
             if (id !== null) {
