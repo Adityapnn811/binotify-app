@@ -14,13 +14,9 @@
     justify-content: center;
 }
 
-.login-logo{
-    height: 20px;
-}
-
 .login-title{
     color: #000000;
-    font-size:35px;
+    font-size:45px;
 }
 
 .login-line-divider{
@@ -58,7 +54,7 @@
 .login-input{
     display: flex;
     flex-direction: column;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 20px;
     text-transform: none;
     letter-spacing: normal;
@@ -78,7 +74,7 @@
     letter-spacing: normal;
     width: 100%;
     box-sizing: border-box;
-    padding:13px;
+    padding:17px;
 }
 
 .login-button-container{

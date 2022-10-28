@@ -1,6 +1,5 @@
 <div class="login-background">
     <div class="login-title-container">
-        <!-- <img src="img/logo.png" class="login-logo"> -->
         <a class="login-title" href="/home" > BINOTIFY </a>
     </div>
 
@@ -33,7 +32,7 @@
             
             <P class="login-register-text">Don't have an account?</P>
 
-            <button class="login-register-button" onclick="window.location.href='/register'" > SIGN UP FOR SPOTIFY </button>                
+            <button class="login-register-button" onclick="window.location.href='/register'" > SIGN UP FOR BINOTIFY </button>                
 
         </div>
     </div>
