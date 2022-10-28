@@ -142,6 +142,28 @@
             return $result;
         }
 
+        public function getSongsInAlbumAndNot($id) {
+            $query = "SELECT * FROM $this->table WHERE album_id = :id OR album_id IS NULL";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            return $this->db->allResult();
+        }
+
+        public function deleteSongFromAlbum($id) {
+            $query = "UPDATE $this->table SET album_id = NULL WHERE song_id = :id ";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            return $this->db->allResult();
+        }
+
+        public function addSongToAlbum($id, $album_id_now) {
+            $query = "UPDATE $this->table SET album_id = :album_id WHERE song_id = :id ";
+            $this->db->query($query);
+            $this->db->bind('album_id', $album_id_now);
+            $this->db->bind('id', $id);
+            return $this->db->allResult();
+        }
+
         public function insertSong($judul, $penyanyi, $tanggal, $genre, $duration, $audio_path, $image_path)
         {
             $query = "INSERT INTO $this->table (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path) VALUES (:judul, :penyanyi, :tanggal, :genre, :duration, :audio_path, :image_path);";

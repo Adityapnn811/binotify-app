@@ -4,7 +4,6 @@
     require_once '../app/views/templates/sidebar.php';
 ?>
 
-
 <body onload="loadData()">
     <?= sidebar() ?>
     <div class="main-body">
