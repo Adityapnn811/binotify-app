@@ -3,7 +3,9 @@
         // method default adalah index (harus ada)
         public function index($id, $edit = "no") {
             if ($edit === "edit") {
-                $data["songs"] = $this->model("Lagu_model")->getSongsInAlbumAndNot($id);
+                $data["penyanyi"] = $this->model("Album_model")->getSingerById($id)[0]["Penyanyi"];
+                $penyanyi = $data["penyanyi"];
+                $data["songs"] = $this->model("Lagu_model")->getSongsInAlbumAndNot($id, $penyanyi);
             } else {
                 $data["songs"] = $this->model("Lagu_model")->getSongsByAlbumId($id, 1);
             }
@@ -52,33 +54,32 @@
             $this->model("Album_Model")->deleteAlbumById($id);
         }
 
-        public function getSongsInAlbumAndNot($id) {
-            $data["songs"] = $this->model("Lagu_model")->getSongsInAlbumAndNot($id);
+        public function getSongsInAlbumAndNot($id, $penyanyi) {
+            $data["songs"] = $this->model("Lagu_model")->getSongsInAlbumAndNot($id, $penyanyi);
             $this->view("album/getSongsInAlbumAndNot", $data);
         }
 
         public function deleteSongFromAlbum() {
             $id = $_POST["song_id"];
+            $penyanyi = $_POST["Penyanyi"];
             $album_id = $_POST["album_id"];
-            $this->model("Lagu_model")->deleteSongFromAlbum($id);
-            $data["songs"] = $this->model("Lagu_model")->getSongsInAlbumAndNot($album_id);
             $data["id"] = $album_id;
-            $data["edit"] = "edit";
-            $this->view('templates/headerEditRedirect', $data);
-            $this->view('album/index', $data);
-            $this->view('templates/footerWithoutBody');
+            $data["status"] = $this->model("Lagu_model")->deleteSongFromAlbum($id);
+            // $data["songs"] = $this->model("Lagu_model")->getSongsInAlbumAndNot($album_id, $penyanyi);
+            // $data["edit"] = "edit";
+            $this->view('album/deleteSongFromAlbum', $data);
+            // $this->view('templates/headerEditRedirect', $data);
+            // $this->view('album/index', $data);
+            // $this->view('templates/footerWithoutBody');
         }
 
         public function addSongToAlbum() {
             $id = $_POST["song_id"];
+            $penyanyi = $_POST["Penyanyi"];
             $album_id = $_POST["album_id"];
-            $this->model("Lagu_model")->addSongToAlbum($id, $album_id);
-            $data["songs"] = $this->model("Lagu_model")->getSongsInAlbumAndNot($album_id);
             $data["id"] = $album_id;
-            $data["edit"] = "edit";
-            $this->view('templates/headerEditRedirect', $data);
-            $this->view('album/index', $data);
-            $this->view('templates/footerWithoutBody');
+            $data["status"] = $this->model("Lagu_model")->addSongToAlbum($id, $album_id);
+            $this->view('album/addSongToAlbum', $data);
         }
     }
 ?>
