@@ -8,6 +8,9 @@ require_once '../app/views/templates/sidebar.php';
 <?php
 $id = $data["id"];
 $edit = ($data["edit"] == "edit");
+if ($edit) {
+    $penyanyi = $data["penyanyi"];
+}
 $body = <<<"EOT"
             <body onload="loadData($id)">
                 <div class="main-body">
@@ -61,7 +64,7 @@ if (!$edit) {
     <?php if (isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]) : ?>
         <div id="editAlbum" class="editButton" onclick="toEdit(<?= $id ?>)">Edit</div>
     <?php endif; ?>
-</div>
+    </div>
     </body>
     <script src="./js/script.js"></script>
     <script type="text/javascript">
@@ -130,13 +133,14 @@ if (!$edit) {
         }
 
         <?php if (isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]) : ?>
+
             function toEdit(id) {
                 window.location.href = "/album/" + id + "/edit";
             }
         <?php endif; ?>
     </script>
     <!-- BUAT HALAMAN NGEDIT ALBUM -->
-<?php else: ?> 
+<?php else : ?>
     <div class="formEditAlbum">
         <div class="formWrapperUp">
             <form class="coverForm" action="/album/uploadCover" method="post" enctype="multipart/form-data">
@@ -176,6 +180,7 @@ if (!$edit) {
     </body>
     <script type="text/javascript">
         const id = <?= $id ?>;
+        const penyanyi = "<?= $penyanyi ?>";
 
         function loadDataEdit(id) {
             const xhttp1 = new XMLHttpRequest();
@@ -213,7 +218,7 @@ if (!$edit) {
                     document.getElementById("daftarLagu").innerHTML = "<tr><th>No Songs Found</th></tr>";
                 }
             };
-            xhttp2.open("GET", "/album/getSongsInAlbumAndNot/" + id);
+            xhttp2.open("GET", "/album/getSongsInAlbumAndNot/" + id + "/" + penyanyi);
             xhttp2.send();
         };
 
@@ -229,7 +234,7 @@ if (!$edit) {
             document.getElementById("ip").value = data.Image_path;
         };
 
-        
+
 
         document.getElementById("deleteButton").addEventListener("click", function() {
             const xhttp = new XMLHttpRequest();
@@ -242,6 +247,7 @@ if (!$edit) {
 
         // Drag and Drop Image
         let imgArea = document.getElementById("imgCover");
+        var options = ['dragenter', 'dragover', 'dragleave', 'drop'];
 
         options.slice(0, 2).forEach(e => {
             imgArea.addEventListener(e, e => {
