@@ -38,5 +38,30 @@
             $result = $this->db->allResult();
             return $result;
         }
+
+        public function updateAlbumById($id, $post) {
+            $id = $post["id"];
+            $judul = $post["Judul"];
+            $tanggal = $post["Tanggal"];
+            $genre = $post["Genre"];
+            $image_path = $post["Image_path"];
+            $query = "UPDATE $this->table SET Judul = :judul, Tanggal_terbit = :tanggal, Genre = :genre, Image_path = :image_path WHERE album_id = :id";
+            $this->db->query($query);
+            $this->db->bind('judul', $judul);
+            $this->db->bind('tanggal', $tanggal);
+            $this->db->bind('genre', $genre);
+            $this->db->bind('image_path', $image_path);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            return $result;
+        }
+
+        public function deleteAlbumById($id) {
+            $query = "DELETE FROM $this->table WHERE album_id = :id";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            return $result;
+        }
     }
 ?>
