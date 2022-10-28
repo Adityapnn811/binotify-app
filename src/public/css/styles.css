@@ -580,7 +580,7 @@ a {
 
 .songPlayer {
     color: #1ed760;
-    margin: 0 0 0 1rem;
+    margin: 0 0 0 2rem;
     width: 10rem;
 }
 
@@ -623,18 +623,14 @@ audio::-webkit-media-controls-panel {
     color: #1ed760;
 }
 
-#inputJudul,
-#inputTanggal,
-#inputGenre {
+.inputField {
     font-size: 0.75rem;
     height: 1.5rem;
     border-radius: 1rem;
     padding-left: 1rem;
 }
 
-#inputJudul:focus,
-#inputTanggal:focus,
-#inputGenre:focus {
+.inputField:focus {
     outline: #1ed760 solid 0.1rem;
 }
 
@@ -644,6 +640,16 @@ audio::-webkit-media-controls-panel {
 
 #inputJudul {
     grid-area: "B";
+}
+
+#labelPenyanyi {
+    margin-top: 0.5rem;
+    grid-area: "G";
+}
+
+#inputPenyanyi {
+    margin-top: 0.5rem;
+    grid-area: "H";
 }
 
 #labelTanggal {
@@ -677,6 +683,14 @@ audio::-webkit-media-controls-panel {
         "C D"
         "E F";
     grid-area: "A";
+}
+
+#uploadContainer {
+    grid-template-areas:
+        "A B"
+        "G F"
+        "C D"
+        "E F";
 }
 
 .formEdit {
@@ -758,6 +772,9 @@ audio::-webkit-media-controls-panel {
     height: 10rem;
     object-fit: fill;
     margin: 2rem 1rem 2rem 2rem;
+}
+
+#imgCover.editImg {
     border-radius: 0.5rem;
     border: 0.1rem dashed #117b36;
 }
@@ -783,4 +800,22 @@ audio::-webkit-media-controls-panel {
 
 #fileSong {
     display: none;
+}
+
+#insertAlbum {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#albumCover {
+    margin: 1rem;
+    width: 10rem;
+    height: 10rem;
+    object-fit: fill;
+}
+
+#albumCover.editImg {
+    border-radius: 0.5rem;
+    border: 0.1rem dashed #117b36;
 }

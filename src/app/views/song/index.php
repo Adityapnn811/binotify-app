@@ -129,11 +129,11 @@ if (!$edit) {
             <form method="post" action="/song/postSongUpdate">
                 <div class="formContainer">
                     <label for="Judul" id="labelJudul">Judul</label>
-                    <input type="text" class="inputField" name="Judul" id="inputJudul">
+                    <input type="text" class="inputField" name="Judul" id="inputJudul" required>
                     <label for="Tanggal" id="labelTanggal">Tanggal Terbit</label>
-                    <input type="text" class="inputField" name="Tanggal" id="inputTanggal">
+                    <input type="text" class="inputField" name="Tanggal" id="inputTanggal" required>
                     <label for="Genre" id="labelGenre">Genre</label>
-                    <input type="text" class="inputField" name="Genre" id="inputGenre">
+                    <input type="text" class="inputField" name="Genre" id="inputGenre" required>
                     <input type="hidden" name="id" id="id">
                     <input type="hidden" name="Duration" id="dur">
                     <input type="hidden" name="Audio_path" id="ap">
@@ -145,7 +145,7 @@ if (!$edit) {
         </div>
         <div class="dropSong" id="dropArea">
             <form action="/song/uploadSong" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" id="fileSong" accept="audio/*" onchange="handleFiles(this.files)">
+                <input type="file" name="file" id="fileSong" accept="audio/*" onchange="handleFiles(this.files)" required>
                 <label id="selector" for="fileSong">Select Song</label>
             </form>
             <h6 class="dragDetail" id="songDetail">or Drag and Drop Here</h6>

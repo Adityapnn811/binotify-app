@@ -60,6 +60,17 @@
             $query = "DELETE FROM $this->table WHERE album_id = :id";
             $this->db->query($query);
             $this->db->bind('id', $id);
+        }
+        
+        public function insertAlbum($judul, $penyanyi, $image_path, $tanggal, $genre)
+        {
+            $query = "INSERT INTO $this->table (Judul, Penyanyi, Image_path, Tanggal_terbit, Genre) VALUES (:judul, :penyanyi, :image_path, :tanggal, :genre);";
+            $this->db->query($query);
+            $this->db->bind('judul', $judul);
+            $this->db->bind('penyanyi', $penyanyi);
+            $this->db->bind('image_path', $image_path);
+            $this->db->bind('tanggal', $tanggal);
+            $this->db->bind('genre', $genre);
             $result = $this->db->allResult();
             return $result;
         }
