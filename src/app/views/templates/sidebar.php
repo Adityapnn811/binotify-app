@@ -11,8 +11,8 @@
             if ($_SESSION["is_admin"]) {
                 $html .= <<<"EOT"
                     <a href="/users">Daftar User</a>
-                    <a href="#">Tambah Lagu</a>
-                    <a href="#">Tambah Album</a>
+                    <a href="/upload/Song">Tambah Lagu</a>
+                    <a href="/upload/Album">Tambah Album</a>
                     
                 EOT;
             }
