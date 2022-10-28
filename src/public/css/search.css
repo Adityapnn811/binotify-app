@@ -1,4 +1,4 @@
-#sort {
+.sort {
   border: 3px solid #ffffff;
   height: 25px;
   border-radius: 5px;
@@ -6,6 +6,7 @@
   color: #000000;
   font-size: 13px;
   margin: auto 5px auto 0px;
+  box-shadow: none;
 }
 
 #genre {
@@ -41,12 +42,19 @@
   border: 3px solid #ffffff;
   border-right: none;
   padding: 5px;
-  border-radius: 5px 0 0 5px;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
   outline: none;
   color: #000000;
 }
 
 .querySearch{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.querySearchNavbar{
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -58,7 +66,8 @@
   border-left: none;
   background: #ffffff;
   color: rgb(0, 0, 0);
-  border-radius: 0 5px 5px 0;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
   cursor: pointer;
 }
 
@@ -67,13 +76,12 @@
   display: flex;
   font-size: 13px;
   justify-content: flex-start;
+  align-items: center;
 }
 
 .wrap{
-  width: 40%;
-  margin-top: 2rem;
+  width: fit-content;
+  margin-top: 1rem;
   position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  align-self: center;
 }

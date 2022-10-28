@@ -1,12 +1,19 @@
-<?php require_once "../app/views/templates/paginationButton.php" ?>
+<?php 
+    require_once "../app/views/templates/paginationButton.php";
+    require_once '../app/views/templates/navbar.php';
+    require_once '../app/views/templates/sidebar.php';
+?>
 
 <body onload="loadData()">
-    <div class="cardContainer">
-        <h2>Daftar User</h2>
-        <table id="listUser"></table>
-        <!-- Max page nya gimana ya -->
-        <div class="pagination" id="pagination">
-            
+    <?= sidebar() ?>
+    <div class="main-body">
+        <?= navbar() ?>
+        <div class="cardContainer">
+            <h2>Daftar User</h2>
+            <table id="listUser"></table>
+            <div class="pagination" id="pagination">
+                
+            </div>
         </div>
     </div>
 </body>

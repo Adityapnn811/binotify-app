@@ -22,6 +22,57 @@
             $paginatedRes = array_slice($result, $offset, $recordPerPage);
             return array ($paginatedRes, $maxPage);
         }
+        
+        public function getAlbumById($id) {
+            $query = "SELECT * FROM $this->table WHERE album_id = :id";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            return $result;
+        }
 
+        public function getAlbumNameById($id) {
+            $query = "SELECT Judul FROM $this->table WHERE album_id = :id";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            return $result;
+        }
+
+        public function updateAlbumById($id, $post) {
+            $id = $post["id"];
+            $judul = $post["Judul"];
+            $tanggal = $post["Tanggal"];
+            $genre = $post["Genre"];
+            $image_path = $post["Image_path"];
+            $query = "UPDATE $this->table SET Judul = :judul, Tanggal_terbit = :tanggal, Genre = :genre, Image_path = :image_path WHERE album_id = :id";
+            $this->db->query($query);
+            $this->db->bind('judul', $judul);
+            $this->db->bind('tanggal', $tanggal);
+            $this->db->bind('genre', $genre);
+            $this->db->bind('image_path', $image_path);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            return $result;
+        }
+
+        public function deleteAlbumById($id) {
+            $query = "DELETE FROM $this->table WHERE album_id = :id";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+        }
+        
+        public function insertAlbum($judul, $penyanyi, $image_path, $tanggal, $genre)
+        {
+            $query = "INSERT INTO $this->table (Judul, Penyanyi, Image_path, Tanggal_terbit, Genre) VALUES (:judul, :penyanyi, :image_path, :tanggal, :genre);";
+            $this->db->query($query);
+            $this->db->bind('judul', $judul);
+            $this->db->bind('penyanyi', $penyanyi);
+            $this->db->bind('image_path', $image_path);
+            $this->db->bind('tanggal', $tanggal);
+            $this->db->bind('genre', $genre);
+            $result = $this->db->allResult();
+            return $result;
+        }
     }
 ?>
