@@ -12,7 +12,7 @@
             $username=$_POST['user_name'];
             $password=$_POST['password'];
 
-            $this->db->query("SELECT * FROM `User` WHERE username=:username");
+            $this->db->query("SELECT * FROM `User` WHERE username=:username OR email=:username");
             $this->db->bind(':username', $username);
             $this->db->execute();
             
