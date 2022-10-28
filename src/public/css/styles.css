@@ -563,18 +563,14 @@ audio::-webkit-media-controls-panel {
     color: #1ed760;
 }
 
-#inputJudul,
-#inputTanggal,
-#inputGenre {
+.inputField {
     font-size: 0.75rem;
     height: 1.5rem;
     border-radius: 1rem;
     padding-left: 1rem;
 }
 
-#inputJudul:focus,
-#inputTanggal:focus,
-#inputGenre:focus {
+.inputField:focus {
     outline: #1ed760 solid 0.1rem;
 }
 
@@ -584,6 +580,16 @@ audio::-webkit-media-controls-panel {
 
 #inputJudul {
     grid-area: "B";
+}
+
+#labelPenyanyi {
+    margin-top: 0.5rem;
+    grid-area: "G";
+}
+
+#inputPenyanyi {
+    margin-top: 0.5rem;
+    grid-area: "H";
 }
 
 #labelTanggal {
@@ -617,6 +623,14 @@ audio::-webkit-media-controls-panel {
         "C D"
         "E F";
     grid-area: "A";
+}
+
+#uploadContainer {
+    grid-template-areas:
+        "A B"
+        "G F"
+        "C D"
+        "E F";
 }
 
 .formEdit {
