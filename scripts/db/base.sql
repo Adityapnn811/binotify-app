@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS Song (
     Duration int NOT NULL,
     Audio_path varchar(256) NOT NULL,
     Image_path varchar(256) NOT NULL,
-    album_id int,
+    album_id int DEFAULT NULL,
     FOREIGN KEY (album_id) REFERENCES Album (album_id) ON DELETE SET NULL
 );
 
@@ -53,6 +53,13 @@ BEGIN
         SET Total_duration = Total_duration + NEW.Duration
         WHERE album_id = NEW.album_id;
     ELSEIF NEW.album_id is NULL and OLD.album_id is not NULL THEN
+        UPDATE Album
+        SET Total_duration = Total_duration - OLD.Duration
+        WHERE album_id = OLD.album_id;
+    ELSEIF NEW.album_id != OLD.album_id THEN
+        UPDATE Album
+        SET Total_duration = Total_duration + NEW.Duration
+        WHERE album_id = NEW.album_id;
         UPDATE Album
         SET Total_duration = Total_duration - OLD.Duration
         WHERE album_id = OLD.album_id;

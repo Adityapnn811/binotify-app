@@ -141,5 +141,20 @@
             $result = $this->db->allResult();
             return $result;
         }
+
+        public function insertSong($judul, $penyanyi, $tanggal, $genre, $duration, $audio_path, $image_path)
+        {
+            $query = "INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path) VALUES (:judul, :penyanyi, :tanggal, :genre, :duration, :audio_path, :image_path);";
+            $this->db->query($query);
+            $this->db->bind('judul', $judul);
+            $this->db->bind('penyanyi', $penyanyi);
+            $this->db->bind('tanggal', $tanggal);
+            $this->db->bind('genre', $genre);
+            $this->db->bind('duration', $duration);
+            $this->db->bind('audio_path', $audio_path);
+            $this->db->bind('image_path', $image_path);
+            $result = $this->db->allResult();
+            return $result;
+        }
     }
 ?>
