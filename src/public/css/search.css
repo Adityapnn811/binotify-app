@@ -42,7 +42,8 @@
   border: 3px solid #ffffff;
   border-right: none;
   padding: 5px;
-  border-radius: 5px 0 0 5px;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
   outline: none;
   color: #000000;
 }
@@ -65,7 +66,8 @@
   border-left: none;
   background: #ffffff;
   color: rgb(0, 0, 0);
-  border-radius: 0 5px 5px 0;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
   cursor: pointer;
 }
 
@@ -78,10 +80,8 @@
 }
 
 .wrap{
-  width: 40%;
-  margin-top: 2rem;
+  width: fit-content;
+  margin-top: 1rem;
   position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  align-self: center;
 }

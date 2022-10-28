@@ -62,7 +62,7 @@
             return $result;
         }
 
-        public function getSongsByAlbumId($page, $id, $recordPerPage = 10) {
+        public function getSongsByAlbumId($id, $page, $recordPerPage = 10) {
             $query = "SELECT * FROM $this->table WHERE album_id = :id";
             $this->db->query($query);
             $this->db->bind('id', $id);
@@ -71,8 +71,23 @@
             $maxPage = (int) ceil($totalRecord / $recordPerPage);
             $offset = $recordPerPage * ($page - 1);
             $paginatedRes = array_slice($result, $offset, $recordPerPage);
-            return array($paginatedRes, $maxPage);
+            return array($paginatedRes, $maxPage, $totalRecord);
         }
+
+        public function updateSongById($id, $judul, $tanggal, $genre, $duration, $audio_path, $image_path) {
+            $query = "UPDATE $this->table SET Judul = :judul, Tanggal_terbit = :tanggal, Genre = :genre, Duration = :duration, Audio_path = :audio_path, Image_path = :image_path WHERE song_id = :id";
+            $this->db->query($query);
+            $this->db->bind('judul', $judul);
+            $this->db->bind('tanggal', $tanggal);
+            $this->db->bind('genre', $genre);
+            $this->db->bind('duration', $duration);
+            $this->db->bind('audio_path', $audio_path);
+            $this->db->bind('image_path', $image_path);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            return $result;
+        }
+
         public function showRecentUploadedSong($recordPerPage = 10) {
             if (count($_POST) === 0) {
                 $q ="";
@@ -118,5 +133,50 @@
             return array ($paginatedRes, $maxPage);
         }
 
+        public function deleteSongById($id)
+        {
+            $query = "DELETE FROM $this->table WHERE song_id = :id";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            return $result;
+        }
+
+        public function getSongsInAlbumAndNot($id) {
+            $query = "SELECT * FROM $this->table WHERE album_id = :id OR album_id IS NULL";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            return $this->db->allResult();
+        }
+
+        public function deleteSongFromAlbum($id) {
+            $query = "UPDATE $this->table SET album_id = NULL WHERE song_id = :id ";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            return $this->db->allResult();
+        }
+
+        public function addSongToAlbum($id, $album_id_now) {
+            $query = "UPDATE $this->table SET album_id = :album_id WHERE song_id = :id ";
+            $this->db->query($query);
+            $this->db->bind('album_id', $album_id_now);
+            $this->db->bind('id', $id);
+            return $this->db->allResult();
+        }
+
+        public function insertSong($judul, $penyanyi, $tanggal, $genre, $duration, $audio_path, $image_path)
+        {
+            $query = "INSERT INTO $this->table (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path) VALUES (:judul, :penyanyi, :tanggal, :genre, :duration, :audio_path, :image_path);";
+            $this->db->query($query);
+            $this->db->bind('judul', $judul);
+            $this->db->bind('penyanyi', $penyanyi);
+            $this->db->bind('tanggal', $tanggal);
+            $this->db->bind('genre', $genre);
+            $this->db->bind('duration', $duration);
+            $this->db->bind('audio_path', $audio_path);
+            $this->db->bind('image_path', $image_path);
+            $result = $this->db->allResult();
+            return $result;
+        }
     }
 ?>

@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS Album (
     album_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     Judul varchar(64) NOT NULL,
     Penyanyi varchar(64) NOT NULL,
-    Total_duration int NOT NULL,
+    Total_duration int DEFAULT 0 NOT NULL,
     Image_path varchar(256) NOT NULL,
     Tanggal_terbit date NOT NULL,
     Genre varchar(64)
@@ -25,30 +25,79 @@ CREATE TABLE IF NOT EXISTS Song (
     Duration int NOT NULL,
     Audio_path varchar(256) NOT NULL,
     Image_path varchar(256) NOT NULL,
-    album_id int,
+    album_id int DEFAULT NULL,
     FOREIGN KEY (album_id) REFERENCES Album (album_id) ON DELETE SET NULL
 );
 
-INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Blurryface',	'Twenty One Pilots',	70,	'./img/blurryface.png',	'2022-10-10',	'alt rock');
+DROP TRIGGER IF EXISTS before_song_insert;
+DROP TRIGGER IF EXists before_song_update;
+DROP TRIGGER IF EXists before_song_delete;
 
-INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Speak Now',	'Taylor Swift',	67,	'./img/SpeakNow.png',	'2022-10-04',	'Pop music');
+DELIMITER //
 
-INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('1989',	'Taylor Swift',	68,	'./img/1989.png',	'2014-11-11',	'Synth pop');
+CREATE TRIGGER before_song_insert BEFORE INSERT ON Song
+FOR EACH ROW
+BEGIN
+    IF NEW.album_id is not NULL THEN
+        UPDATE Album
+        SET Total_duration = Total_duration + NEW.Duration
+        WHERE album_id = NEW.album_id;
+    END IF;
+END;//
 
-INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Tulus',	'Tulus',	29,	'./img/tulus.jpg',	'2011-11-11',	'Pop music');
+CREATE TRIGGER before_song_update BEFORE UPDATE ON Song
+FOR EACH ROW
+BEGIN
+    IF NEW.album_id is not NULL and OLD.album_id is NULL THEN
+        UPDATE Album
+        SET Total_duration = Total_duration + NEW.Duration
+        WHERE album_id = NEW.album_id;
+    ELSEIF NEW.album_id is NULL and OLD.album_id is not NULL THEN
+        UPDATE Album
+        SET Total_duration = Total_duration - OLD.Duration
+        WHERE album_id = OLD.album_id;
+    ELSEIF NEW.album_id != OLD.album_id THEN
+        UPDATE Album
+        SET Total_duration = Total_duration + NEW.Duration
+        WHERE album_id = NEW.album_id;
+        UPDATE Album
+        SET Total_duration = Total_duration - OLD.Duration
+        WHERE album_id = OLD.album_id;
+    END IF;
+END;//
 
-INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Positions',	'Ariana Grande',	51,	'./img/positions.png',	'2021-10-10',	'R&B/Soul');
+CREATE TRIGGER before_song_delete BEFORE DELETE ON Song
+FOR EACH ROW
+BEGIN
+    IF OLD.album_id is not NULL THEN
+        UPDATE Album
+        SET Total_duration = Total_duration - OLD.Duration
+        WHERE album_id = OLD.album_id;
+    END IF;
+END;//
 
-INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('In The Lonely Hour',	'Sam Smith',	35,	'./img/inTheLonelyHour.png',	'2014-05-04',	'Neo-R&B');
+DELIMITER ;
 
-INSERT INTO Album (Judul, Penyanyi, Total_duration, Image_path, Tanggal_terbit, Genre)
-VALUES ('Shivers',	'Ed Sheeran',	7,	'./img/shivers.png',	'2021-02-02',	'Alternative/Indie');
+INSERT INTO Album (Judul, Penyanyi, Image_path, Tanggal_terbit, Genre)
+VALUES ('Blurryface',	'Twenty One Pilots',	'./img/blurryface.png',	'2022-10-10',	'alt rock');
+
+INSERT INTO Album (Judul, Penyanyi, Image_path, Tanggal_terbit, Genre)
+VALUES ('Speak Now',	'Taylor Swift',	'./img/SpeakNow.png',	'2022-10-04',	'Pop music');
+
+INSERT INTO Album (Judul, Penyanyi, Image_path, Tanggal_terbit, Genre)
+VALUES ('1989',	'Taylor Swift',	'./img/1989.png',	'2014-11-11',	'Synth pop');
+
+INSERT INTO Album (Judul, Penyanyi, Image_path, Tanggal_terbit, Genre)
+VALUES ('Tulus',	'Tulus',	'./img/tulus.jpg',	'2011-11-11',	'Pop music');
+
+INSERT INTO Album (Judul, Penyanyi, Image_path, Tanggal_terbit, Genre)
+VALUES ('Positions',	'Ariana Grande',	'./img/positions.png',	'2021-10-10',	'R&B/Soul');
+
+INSERT INTO Album (Judul, Penyanyi, Image_path, Tanggal_terbit, Genre)
+VALUES ('In The Lonely Hour',	'Sam Smith',	'./img/inTheLonelyHour.png',	'2014-05-04',	'Neo-R&B');
+
+INSERT INTO Album (Judul, Penyanyi, Image_path, Tanggal_terbit, Genre)
+VALUES ('Shivers',	'Ed Sheeran',	'./img/shivers.png',	'2021-02-02',	'Alternative/Indie');
 
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
@@ -79,7 +128,7 @@ INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, 
 VALUES ('Teman Hidup', 'Tulus', '2011-11-11', 'Pop music', 4, '/img/', './img/tulus.jpg', 4);
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
-VALUES ('34+35', 'Ariana Grande', '2021-10-10', 'Contemporary R&B', 3, '/img/', './img/positions.png', 5);
+VALUES ('34+35', 'Ariana Grande', '2021-10-10', 'Contemporary R&B', 3, './songs/34+35.mp3', './img/positions.png', 5);
 
 INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path, album_id)
 VALUES ('pov', 'Ariana Grande', '2021-10-10', 'Rhythm and blues', 3, '/img/', './img/positions.png', 5);

@@ -2,8 +2,12 @@
     require_once "../app/views/templates/laguCard.php";
     require_once "../app/views/templates/paginationButton.php";
     require_once '../app/views/templates/navbar.php';
+    require_once '../app/views/templates/sidebar.php';
 ?>
 
+<?= sidebar() ?>
+
+<div class="main-body">
 <?= navbar() ?>
 <div class="searchContainer">
     <div class = "wrap">
@@ -51,4 +55,5 @@
         <?php endif; ?>
     </div>
 
+</div>
 </div>
