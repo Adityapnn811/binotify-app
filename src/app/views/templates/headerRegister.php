@@ -28,4 +28,4 @@
         <link rel="stylesheet" href="/css/login.css" >
         <link rel="stylesheet" href="/css/register.css" >
     </head>
-    <body>
+    <body id="bodyNoNavbar">

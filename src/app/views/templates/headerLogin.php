@@ -25,4 +25,4 @@
         <link rel="stylesheet" href="/css/search.css" >
         <link rel="stylesheet" href="/css/login.css" >
     </head>
-    <body>
+    <body id="bodyNoNavbar">

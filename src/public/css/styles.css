@@ -18,6 +18,12 @@ body {
     background-attachment: fixed;
 }
 
+#bodyNoNavbar{
+    min-height: 100vh;
+    margin: 0;
+    display:block;
+}
+
 .cardContainer {
     display: flex;
     flex-direction: column;
