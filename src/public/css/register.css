@@ -41,3 +41,12 @@
 .register-href:hover{
     color: rgb(116, 227, 155);
 }
+
+.register-error-msg-ajax{
+    color: #fb5252;
+    font-size: 12px;
+    display:none;
+    text-align:left;
+    margin: 0px;
+    font-weight: 800;
+}

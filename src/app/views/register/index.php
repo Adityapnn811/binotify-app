@@ -11,16 +11,17 @@
                     </p >
                 <?php endif; ?>
 
-
                 <form method="post" action="/register/signup" class="login-form">
                     <div class="login-input">
                         <label class="login-input-text" for="username" required> Username </label>
                         <input class="login-input-box" placeholder="Enter your username" type="text" name="username" id="username" required onkeyup="processUsernameChange(this.value)">
+                        <p class="register-error-msg-ajax" id="errorMsgUsername">a</p>
                     </div>
                     
                     <div class="login-input">
                         <label class="login-input-text" requires> Email </label>
                         <input class="login-input-box" placeholder="Enter your email" type="text" name="email" id="email" class="" required onkeyup="processEmailChange(this.value)">
+                        <p class="register-error-msg-ajax" id="EMAILL">b</p>
                     </div>
 
                     <div class="login-input">
@@ -34,19 +35,17 @@
                     </div>
 
                     
+                    <div class="register-button-container">
+                        <button class="register-button" type="submit" value="Submit" id="registerButton"> SIGN UP </button>
+                    </div>
+                    
+                    <p class="register-login-button">
+                        Have an account?
+                        <a class="register-href" href="/login">Login</a>
+                    </p>
                 </form> 
-                <div class="register-button-container">
-                    <button class="register-button" type="submit" value="Submit" id="registerButton"> SIGN UP </button>
-                </div>
-
-                <p class="register-login-button">
-                    Have an account?
-                    <a class="register-href" href="/login">Login</a>
-                </p>
-
 
             </div>
- 
     </div>
 
 </div>
@@ -61,6 +60,8 @@
     }
 
     function checkUsername(usernameInput) {
+        let errorMsgUsername = document.getElementById("errorMsgUsername")
+        
         // Masukkin xml di sini
         if (!usernameInput == "") {
             let pattern = /^[a-zA-Z0-9_]+$/
@@ -76,8 +77,13 @@
                             const res = JSON.parse(this.responseText);
                             if (res.count === 0) {
                                 changeBorder(true, "username");
+                                document.getElementById("registerButton").disabled = false;
+                                errorMsgUsername.style.display = "none";
                             } else {
                                 changeBorder(false, "username");
+                                document.getElementById("registerButton").disabled = true;
+                                errorMsgUsername.innerHTML = "This username already used";
+                                errorMsgUsername.style.display = "block";
                             }
                         } catch {
                             // do nothing
@@ -88,19 +94,23 @@
                 xhttp.send();
             }
         } else {
-            let element = document.getElementById("username");
-            element.classList = "";
-            element.classList.add("noBorder");
+            changeBorder(false, "username");
+            document.getElementById("registerButton").disabled = true;
+            errorMsgUsername.innerHTML = "You need to enter your username";
+            errorMsgUsername.style.display = "block";
         }
     }
 
     function checkEmail(emailInput) {
+        let errorMsgEmail = document.getElementById("EMAILL");
         // Masukkin xml di sini
         if (!emailInput == "") {
             let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             if (!pattern.test(emailInput)) {
                 changeBorder(false, "email");
                 document.getElementById("registerButton").disabled = true;
+                errorMsgEmail.innerHTML = "This email is invalid. Make sure it's written like example@email.com";
+                errorMsgEmail.style.display = "block";
             } else {
                 const xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
@@ -110,9 +120,16 @@
                             const res = JSON.parse(this.responseText);
                             if (res.count === 0) {
                                 console.log("here")
+                                
+                                document.getElementById("registerButton").disabled = false;
                                 changeBorder(true, "email");
-                            } else {
+                                errorMsgEmail.style.display = "none";
+
+                            }else {
                                 changeBorder(false, "email");
+                                document.getElementById("registerButton").disabled = true;
+                                errorMsgEmail.innerHTML = "This email already used";
+                                errorMsgEmail.style.display = "block";
                             }
                         } catch {
                             // do nothing
@@ -123,9 +140,9 @@
                 xhttp.send();
             }
         } else {
-            let element = document.getElementById("email");
-            element.classList = "";
-            element.classList.add("noBorder");
+            changeBorder(false, "email");
+            errorMsgEmail.innerHTML = "You need to enter your email";
+            errorMsgEmail.style.display = "block";
         }
     }
 
