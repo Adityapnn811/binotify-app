@@ -44,7 +44,44 @@ extension=mysqli
 3. Jalankan perintah `docker-compose up --build`
 
 ## Screenshot
+1. Halaman Login
+![Login](Screenshots/LoginPage.jpg)
 
+2. Halaman Register
+![Register](Screenshots/SignUpPage.jpg)
+
+3. Halaman Home User
+![Home User](Screenshots/HomePageUser.jpg)
+
+4. Halaman Home Admin
+![Home Admin](Screenshots/HomePageAdmin.jpg)
+
+5. Halaman Daftar Album
+![Daftar Album](Screenshots/DaftarAlbum.jpg)
+
+6. Halaman Daftar User
+![Daftar User](Screenshots/DaftarUserPage.jpg)
+
+7. Halaman Search
+![Search](Screenshots/Search.jpg)
+
+8. Halaman Edit Lagu
+![Edit Lagu](Screenshots/EditLagu.jpg)
+
+9. Halaman Edit Album
+![Edit Album](Screenshots/EditAlbum.jpg)
+
+10. Halaman Tambah Lagu
+![Tambah Lagu](Screenshots/TambahLaguPage.jpg)
+
+11. Halaman Tambah Album
+![Tambah Album](Screenshots/TambahAlbumPage.jpg)
+
+12. Halaman Detail Lagu
+![Detail Lagu](Screenshots/PlaySongUser.jpg)
+
+13. Halaman Detail Album
+![Detail Album](Screenshots/AlbumPage.jpg)
 ## Pembagian tugas
 ### Server side
 - Login: 13520096
@@ -52,7 +89,7 @@ extension=mysqli
 - Home: 13520096
 - Daftar Album: 13520049
 - Search, sort, filter: 13520049
-- Detail Album: 13520129
+- Detail Album: 13520129, 13520049
 - Detail lagu: 13520129
 - Daftar Users: 13520049
 - Tambah Album/Lagu: 13520129
@@ -63,7 +100,7 @@ extension=mysqli
 - Home: 13520096
 - Daftar Album: 13520049
 - Search, sort, filter: 13520049
-- Detail Album: 13520129
+- Detail Album: 13520129, 13520049
 - Detail lagu: 13520129
 - Daftar Users: 13520049
 - Tambah Album/Lagu: 13520129
