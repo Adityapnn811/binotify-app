@@ -531,7 +531,7 @@ a {
 
 .songPlayer {
     color: #1ed760;
-    margin: 0 0 0 1rem;
+    margin: 0 0 0 2rem;
     width: 10rem;
 }
 
@@ -703,6 +703,9 @@ audio::-webkit-media-controls-panel {
     height: 10rem;
     object-fit: fill;
     margin: 2rem 1rem 2rem 2rem;
+}
+
+#imgCover.editImg {
     border-radius: 0.5rem;
     border: 0.1rem dashed #117b36;
 }
@@ -728,4 +731,22 @@ audio::-webkit-media-controls-panel {
 
 #fileSong {
     display: none;
+}
+
+#insertAlbum {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#albumCover {
+    margin: 1rem;
+    width: 10rem;
+    height: 10rem;
+    object-fit: fill;
+}
+
+#albumCover.editImg {
+    border-radius: 0.5rem;
+    border: 0.1rem dashed #117b36;
 }

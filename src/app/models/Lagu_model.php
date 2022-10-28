@@ -144,7 +144,7 @@
 
         public function insertSong($judul, $penyanyi, $tanggal, $genre, $duration, $audio_path, $image_path)
         {
-            $query = "INSERT INTO Song (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path) VALUES (:judul, :penyanyi, :tanggal, :genre, :duration, :audio_path, :image_path);";
+            $query = "INSERT INTO $this->table (Judul, Penyanyi, Tanggal_terbit, Genre, Duration, Audio_path, Image_path) VALUES (:judul, :penyanyi, :tanggal, :genre, :duration, :audio_path, :image_path);";
             $this->db->query($query);
             $this->db->bind('judul', $judul);
             $this->db->bind('penyanyi', $penyanyi);

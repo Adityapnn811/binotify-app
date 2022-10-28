@@ -23,6 +23,17 @@
             $this->view("upload/postSongInsert", $data);
         }
 
+        public function postAlbumInsert()
+        {
+            $judul = $_POST["Judul"];
+            $penyanyi = $_POST["Penyanyi"];
+            $tanggal = $_POST["Tanggal"];
+            $genre = $_POST["Genre"];
+            $image_path = $_POST["Image_path"];
+            $data["status"] = $this->model("Album_model")->insertAlbum($judul, $penyanyi, $image_path, $tanggal, $genre);
+            $this->view("upload/postAlbumInsert", $data);
+        }
+
         public function uploadSong()
         {
             $name = $_FILES["file"]["name"];

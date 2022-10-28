@@ -5,7 +5,6 @@ require_once '../app/views/templates/sidebar.php';
 $issong = ($data["upType"] === "Song");
 ?>
 
-
 <body onload="loadData()">
     <?= sidebar() ?>
     <div class="main-body">
@@ -24,22 +23,22 @@ $issong = ($data["upType"] === "Song");
                     <form method="post" action="/upload/postSongInsert">
                         <div class="formContainer" id="uploadContainer">
                             <label for="Judul" id="labelJudul">Judul</label>
-                            <input type="text" class="inputField" name="Judul" id="inputJudul">
+                            <input type="text" class="inputField" name="Judul" id="inputJudul" required>
                             <label for="Penyanyi" id="labelPenyanyi">Penyanyi</label>
-                            <input type="text" class="inputField" name="Penyanyi" id="inputPenyanyi">
+                            <input type="text" class="inputField" name="Penyanyi" id="inputPenyanyi" required>
                             <label for="Tanggal" id="labelTanggal">Tanggal Terbit</label>
-                            <input type="text" class="inputField" name="Tanggal" id="inputTanggal">
+                            <input type="text" class="inputField" name="Tanggal" id="inputTanggal" required>
                             <label for="Genre" id="labelGenre">Genre</label>
-                            <input type="text" class="inputField" name="Genre" id="inputGenre">
+                            <input type="text" class="inputField" name="Genre" id="inputGenre" required>
                             <input type="hidden" name="Duration" id="dur">
                             <input type="hidden" name="Audio_path" id="ap">
-                            <input type="hidden" name="Image_path" id="ip">
-                            <input type="submit" class="saveEdit" value="Save" id="submitButton">
+                            <input type="hidden" name="Image_path" id="ip" value="./img/laguDefault.jpg">
+                            <input type=" submit" class="saveEdit" value="Save" id="submitButton">
                         </div>
                     </form>
                 </div>
                 <div class="dropSong" id="dropArea">
-                    <form action="/upload/uploadSong" method="post" enctype="multipart/form-data">
+                    <form action="/upload/uploadSong" method="post" enctype="multipart/form-data" required>
                         <input type="file" name="file" id="fileSong" accept="audio/*" onchange="handleFiles(this.files)">
                         <label id="selector" for="fileSong">Select Song</label>
                     </form>
@@ -182,5 +181,98 @@ $issong = ($data["upType"] === "Song");
     }
 </script>
 <?php else : ?>
+    <div class="formEdit">
+        <form class="coverForm" id="insertAlbum" action="/upload/uploadCover" method="post" enctype="multipart/form-data">
+            <img id="albumCover" src="../img/laguDefault.jpg" alt="cover lagu" class="editImg">
+            <div class="coverSelector">
+                <input type="file" name="file" id="fileCover" accept="image/*" onchange="handleImageFiles(this.files)">
+                <label id="selector" for="fileCover">Select Cover</label>
+                <h6 class="dragDetail" id="coverDetail">or Drag and Drop to Image Box</h6>
+            </div>
+        </form>
+        <form method="post" action="/upload/postAlbumInsert">
+            <div class="formContainer" id="uploadContainer">
+                <label for="Judul" id="labelJudul">Judul</label>
+                <input type="text" class="inputField" name="Judul" id="inputJudul" required>
+                <label for="Penyanyi" id="labelPenyanyi">Penyanyi</label>
+                <input type="text" class="inputField" name="Penyanyi" id="inputPenyanyi" required>
+                <label for="Tanggal" id="labelTanggal">Tanggal Terbit</label>
+                <input type="text" class="inputField" name="Tanggal" id="inputTanggal" required>
+                <label for="Genre" id="labelGenre">Genre</label>
+                <input type="text" class="inputField" name="Genre" id="inputGenre" required>
+                <input type="hidden" name="Image_path" id="ip" value="./img/laguDefault.jpg">
+                <input type="submit" class="saveEdit" value="Save" id="submitButton">
+            </div>
+        </form>
+    </div>
+    </body>
+    <script type="text/javascript">
+        function loadData() {
+            document.getElementById("inputJudul").placeholder = "e.x. Machine Head";
+            document.getElementById("inputPenyanyi").placeholder = "e.x. Deep Purple";
+            document.getElementById("inputTanggal").placeholder = "e.x. 1972-12-25";
+            document.getElementById("inputGenre").placeholder = "e.x. Classic Rock";
+        };
 
+        // Drag and Drop Image
+        let imgArea = document.getElementById("albumCover");
+        var options = ['dragenter', 'dragover', 'dragleave', 'drop'];
+
+        options.slice(0, 2).forEach(e => {
+            imgArea.addEventListener(e, e => {
+                e.preventDefault();
+                e.stopPropagation();
+                imgArea.style.borderColor = "#22f66c";
+            });
+        });
+
+        options.slice(2).forEach(e => {
+            imgArea.addEventListener(e, e => {
+                e.preventDefault();
+                e.stopPropagation();
+                imgArea.style.borderColor = "#117b36";
+            });
+        });
+
+        imgArea.addEventListener('drop', dropImageFile)
+
+        function dropImageFile(e) {
+            var dt = e.dataTransfer;
+            var files = dt.files;
+            handleImageFiles(files);
+        }
+
+        function handleImageFiles(files) {
+            var file = files[0];
+            uploadImageFile(file);
+        }
+
+        function uploadImageFile(file) {
+            var formData = new FormData();
+            formData.append('file', file);
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.responseText);
+                    const res = JSON.parse(this.responseText);
+                    setImageMeta(res);
+                    // setOthers(res);
+                }
+            };
+            xhttp.open("POST", "/upload/uploadCover");
+            xhttp.send(formData);
+        }
+
+        function setImageMeta(data) {
+            document.getElementById("coverDetail").innerHTML = data["name"];
+            document.getElementById("albumCover").src = "../." + data["Image_path"];
+            document.getElementById("ip").value = data["Image_path"];
+        }
+
+        function toMinutes(time) {
+            var mins = (~~(time / 60));
+            var secs = (time - mins * 60).toFixed().toString().padStart(2, "0");
+            return `${mins}:${secs}`;
+        }
+    </script>
 <?php endif; ?>
