@@ -74,12 +74,15 @@
             return array($paginatedRes, $maxPage, $totalRecord);
         }
 
-        public function updateSongById($id, $judul, $tanggal, $genre) {
-            $query = "UPDATE $this->table SET Judul = :judul, Tanggal_terbit = :tanggal, Genre = :genre WHERE song_id = :id";
+        public function updateSongById($id, $judul, $tanggal, $genre, $duration, $audio_path, $image_path) {
+            $query = "UPDATE $this->table SET Judul = :judul, Tanggal_terbit = :tanggal, Genre = :genre, Duration = :duration, Audio_path = :audio_path, Image_path = :image_path WHERE song_id = :id";
             $this->db->query($query);
             $this->db->bind('judul', $judul);
             $this->db->bind('tanggal', $tanggal);
             $this->db->bind('genre', $genre);
+            $this->db->bind('duration', $duration);
+            $this->db->bind('audio_path', $audio_path);
+            $this->db->bind('image_path', $image_path);
             $this->db->bind('id', $id);
             $result = $this->db->allResult();
             return $result;
@@ -128,6 +131,15 @@
             $paginatedRes = array_slice($result, $offset, $recordPerPage);
 
             return array ($paginatedRes, $maxPage);
+        }
+
+        public function deleteSongById($id)
+        {
+            $query = "DELETE FROM $this->table WHERE song_id = :id";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            return $result;
         }
     }
 ?>

@@ -116,26 +116,38 @@ if (!$edit) {
     </script>
 <?php else : ?>
     <div class="formEdit">
-        <form method="post" action="/song/postSongUpdate">
-            <div class="formContainer">
-                <h1 id="labelForm">Edit Lagu</h1>
-                <label for="Judul" id="labelJudul">Judul</label>
-                <input type="text" class="inputField" name="Judul" id="inputJudul">
-                <label for="Tanggal" id="labelTanggal">Tanggal Terbit</label>
-                <input type="text" class="inputField" name="Tanggal" id="inputTanggal">
-                <label for="Genre" id="labelGenre">Genre</label>
-                <input type="text" class="inputField" name="Genre" id="inputGenre">
-                <input type="hidden" name="id" id="id">
-                <input type="submit" class="saveEdit" value="Save" id="submitButton">
-            </div>
-        </form>
-        <div class="dropSong" id="dropArea">
-            <form action="/song/uploadSongById" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" id="fileSong" accept="audio/*" onchange="handleFiles(this.files)">
-                <label id="selector" for="fileSong">Select Songs</label>
+        <div class="formWrapperLeft">
+            <form class="coverForm" action="/song/uploadCover" method="post" enctype="multipart/form-data">
+                <img id="imgCover" alt="cover lagu" class="editImg">
+                <div class="coverSelector">
+                    <input type="file" name="file" id="fileCover" accept="image/*" onchange="handleImageFiles(this.files)">
+                    <label id="selector" for="fileCover">Select Cover</label>
+                    <h6 class="dragDetail" id="coverDetail">or Drag and Drop to Image Box</h6>
+                </div>
             </form>
-            <h6 class="dragDetail">or Drag and Drop Here</h6>
-            <div id="gallery"></div>
+            <form method="post" action="/song/postSongUpdate">
+                <div class="formContainer">
+                    <label for="Judul" id="labelJudul">Judul</label>
+                    <input type="text" class="inputField" name="Judul" id="inputJudul">
+                    <label for="Tanggal" id="labelTanggal">Tanggal Terbit</label>
+                    <input type="text" class="inputField" name="Tanggal" id="inputTanggal">
+                    <label for="Genre" id="labelGenre">Genre</label>
+                    <input type="text" class="inputField" name="Genre" id="inputGenre">
+                    <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="Duration" id="dur">
+                    <input type="hidden" name="Audio_path" id="ap">
+                    <input type="hidden" name="Image_path" id="ip">
+                    <input type="submit" class="saveEdit" value="Save" id="submitButton">
+                    <div class="editButton" id="deleteButton">Delete</div>
+                </div>
+            </form>
+        </div>
+        <div class="dropSong" id="dropArea">
+            <form action="/song/uploadSong" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="fileSong" accept="audio/*" onchange="handleFiles(this.files)">
+                <label id="selector" for="fileSong">Select Song</label>
+            </form>
+            <h6 class="dragDetail" id="songDetail">or Drag and Drop Here</h6>
         </div>
     </div>
     </body>
@@ -167,7 +179,11 @@ if (!$edit) {
         };
 
         function setData(data) {
+            document.getElementById("imgCover").src = "../." + data.Image_path;
             document.getElementById("id").value = data.song_id;
+            document.getElementById("dur").value = data.Duration;
+            document.getElementById("ap").value = data.Audio_path;
+            document.getElementById("ip").value = data.Image_path;
             document.getElementById("inputJudul").placeholder = "Old: " + data.Judul;
             document.getElementById("inputTanggal").placeholder = "Old: " + data.Tanggal_terbit;
             document.getElementById("inputGenre").placeholder = "Old: " + data.Genre;
@@ -175,9 +191,18 @@ if (!$edit) {
             document.getElementById("inputTanggal").value = data.Tanggal_terbit;
             document.getElementById("inputGenre").value = data.Genre;
         };
-
-        // Drag and Drop
+        // Drag and Drop Song
         const id = <?= $id ?>;
+
+        document.getElementById("deleteButton").addEventListener("click", function() {
+            const xhttp = new XMLHttpRequest();
+            var formData = new FormData();
+            formData.append("id", id);
+            xhttp.open("POST", "/song/deleteSong");
+            xhttp.send(formData);
+            window.location.href = "/home";
+        });
+
         let dropArea = document.getElementById("dropArea");
         var options = ['dragenter', 'dragover', 'dragleave', 'drop'];
 
@@ -209,50 +234,99 @@ if (!$edit) {
         function handleFiles(files) {
             var file = files[0];
             uploadFile(file);
-            // previewFile(file);
-        }
-
-        function previewFile(file) {
-            let reader = new FileReader();
-            reader.readAsArrayBuffer(file);
-            reader.onloadend = function() {
-                var dv = new DataView(this.result);
-                if (dv.getString(3, dv.byteLength - 128) == 'TAG') {
-                    var title = dv.getString(30, dv.tell());
-                    var artist = dv.getString(30, dv.tell());
-                    var album = dv.getString(30, dv.tell());
-                    var year = dv.getString(4, dv.tell());
-                    console.log(title, artist, album, year);
-                } else {
-                    // no ID3v1 data found.
-                }
-                // let img = document.createElement('img');
-                // img.src = reader.result;
-                // document.getElementById('gallery').appendChild(img);
-            }
         }
 
         function uploadFile(file) {
             var formData = new FormData();
-            formData.append('id', id);
             formData.append('file', file);
-            console.log(formData);
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     console.log(this.responseText);
-                    // ambil data html dari response di sini
-                    // const res = JSON.parse(this.responseText);
-                    // tambahin row di sini
-                    // setMeta(res[0]);
+                    const res = JSON.parse(this.responseText);
+                    setMeta(res["tags"]);
+                    setOthers(res);
                 }
             };
-            xhttp.open("POST", "/song/uploadSongById");
+            xhttp.open("POST", "/song/uploadSong");
             xhttp.send(formData);
         }
 
         function setMeta(data) {
-            console.log(data);
+            document.getElementById("inputJudul").value = data.title[0];
+            document.getElementById("inputTanggal").value = data.year[0] + "-01-01";
+            document.getElementById("inputGenre").value = data.genre[0];
+        }
+
+        function setOthers(data) {
+            document.getElementById("songDetail").innerHTML = data["name"] + ", " + toMinutes(data["Duration"]);
+            document.getElementById("dur").value = data["Duration"];
+            document.getElementById("ap").value = data["Audio_path"];
+            if (data["Image_path"] !== undefined) {
+                document.getElementById("coverDetail").innerHTML = data["img_name"];
+                document.getElementById("imgCover").src = "../." + data["Image_path"];
+                document.getElementById("ip").value = data["Image_path"];
+            }
+        }
+
+        // Drag and Drop Image
+        let imgArea = document.getElementById("imgCover");
+
+        options.slice(0, 2).forEach(e => {
+            imgArea.addEventListener(e, e => {
+                e.preventDefault();
+                e.stopPropagation();
+                imgArea.style.borderColor = "#22f66c";
+            });
+        });
+
+        options.slice(2).forEach(e => {
+            imgArea.addEventListener(e, e => {
+                e.preventDefault();
+                e.stopPropagation();
+                imgArea.style.borderColor = "#117b36";
+            });
+        });
+
+        imgArea.addEventListener('drop', dropImageFile)
+
+        function dropImageFile(e) {
+            var dt = e.dataTransfer;
+            var files = dt.files;
+            handleImageFiles(files);
+        }
+
+        function handleImageFiles(files) {
+            var file = files[0];
+            uploadImageFile(file);
+        }
+
+        function uploadImageFile(file) {
+            var formData = new FormData();
+            formData.append('file', file);
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // console.log(this.responseText);
+                    const res = JSON.parse(this.responseText);
+                    setImageMeta(res);
+                    // setOthers(res);
+                }
+            };
+            xhttp.open("POST", "/song/uploadCover");
+            xhttp.send(formData);
+        }
+
+        function setImageMeta(data) {
+            document.getElementById("coverDetail").innerHTML = data["name"];
+            document.getElementById("imgCover").src = "../." + data["Image_path"];
+            document.getElementById("ip").value = data["Image_path"];
+        }
+
+        function toMinutes(time) {
+            var mins = (~~(time / 60));
+            var secs = (time - mins * 60).toFixed().toString().padStart(2, "0");
+            return `${mins}:${secs}`;
         }
     </script>
 <?php endif; ?>
