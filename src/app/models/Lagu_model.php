@@ -142,10 +142,11 @@
             return $result;
         }
 
-        public function getSongsInAlbumAndNot($id) {
-            $query = "SELECT * FROM $this->table WHERE album_id = :id OR album_id IS NULL";
+        public function getSongsInAlbumAndNot($id, $penyanyi) {
+            $query = "SELECT * FROM $this->table WHERE album_id = :id OR (album_id IS NULL AND Penyanyi = :penyanyi)";
             $this->db->query($query);
             $this->db->bind('id', $id);
+            $this->db->bind('penyanyi', $penyanyi);
             return $this->db->allResult();
         }
 

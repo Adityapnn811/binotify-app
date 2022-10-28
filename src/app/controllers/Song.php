@@ -79,5 +79,15 @@
             $id = $_POST["id"];
             $this->model("Lagu_model")->deleteSongById($id);
         }
+
+        public function increaseSessionSongCount() 
+        {
+            if (!isset($_SESSION["song_count"])) {
+                $_SESSION["song_count"] = 1;
+            }
+            $_SESSION["song_count"] += 1;
+            $data["song_count"] = $_SESSION["song_count"];
+            $this->view("song/song_count", $data);
+        }
     }
 ?>

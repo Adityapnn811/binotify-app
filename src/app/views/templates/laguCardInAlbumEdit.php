@@ -29,6 +29,7 @@ function laguCardInEdit($album_id, $album_id_now, $id= "1", $judul = "Judul", $p
         $html .= <<<"EOT"
                 <form method="post" action="/album/deleteSongFromAlbum" >
                     <input type="hidden" name="song_id" value="$id"/>
+                    <input type="hidden" name="Penyanyi" value="$penyanyi"/>
                     <input type="hidden" name="album_id" value="$album_id_now"/>
                     <button type="submit" class="editButtonAlbumDelete">Delete</button>
                 </form>
@@ -40,6 +41,7 @@ function laguCardInEdit($album_id, $album_id_now, $id= "1", $judul = "Judul", $p
         $html .= <<<"EOT"
                 <form method="post" action="/album/addSongToAlbum" >
                     <input type="hidden" name="song_id" value="$id"/>
+                    <input type="hidden" name="Penyanyi" value="$penyanyi"/>
                     <input type="hidden" name="album_id" value="$album_id_now"/>
                     <button type="submit" class="editButtonAlbumAdd">Add</button>
                 </form>

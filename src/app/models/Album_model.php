@@ -74,5 +74,14 @@
             $result = $this->db->allResult();
             return $result;
         }
+
+        public function getSingerById($id)
+        {
+            $query = "SELECT Penyanyi FROM $this->table WHERE album_id = :id";
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            $result = $this->db->allResult();
+            return $result;
+        }
     }
 ?>

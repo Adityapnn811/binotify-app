@@ -763,6 +763,18 @@ audio::-webkit-media-controls-panel {
     place-self: center end;
 }
 
+#redirRegis {
+    box-shadow: 0 0.2rem 0 #117b36;
+}
+
+#redirRegis:hover {
+    cursor: pointer;
+    translate: 0 0.2rem;
+    background-color: #22f66c;
+    box-shadow: none;
+    transition: 0.1s ease-in-out;
+}
+
 .saveEdit {
     place-self: center;
     font-size: 1rem;
@@ -845,4 +857,18 @@ audio::-webkit-media-controls-panel {
 #albumCover.editImg {
     border-radius: 0.5rem;
     border: 0.1rem dashed #117b36;
+}
+
+.block {
+    display: flex;
+    height: 1.5rem;
+    width: 10rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    font-weight: bold;
+    margin: 0 0 0 2rem;
+    color: #181818;
+    background-color: #1ed760;
+    border-radius: 1rem;
 }
