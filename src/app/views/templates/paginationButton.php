@@ -33,11 +33,13 @@
         if (count($_POST) === 0) {
             $q = "";
             $genre = "";
-            $sort = "asc";
+            $sort = "None";
+            $sortYear = "None";
         } else {
             $q = $post["q"];
             $genre = $post["genre"];
             $sort = $post["sort"];
+            $sortYear = $post["sortYear"];
         }
         $class = "paginationButton";
         if ($currentPage === $page) {
@@ -48,6 +50,7 @@
                     <input type="hidden" name="page" value="$page"/>
                     <input type="hidden" name="q" id="q" value="$q" />
                     <input type="hidden" name="sort" id="sort" value="$sort"/>
+                    <input type="hidden" name="sortYear" id="sortYear" value="$sortYear"/>
                     <input type="hidden" name="genre" id="genre" value="$genre"/>                
                     <button type="submit" class="$class">$page</button>
             </form>

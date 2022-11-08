@@ -33,7 +33,7 @@ $issong = ($data["upType"] === "Song");
                             <input type="hidden" name="Duration" id="dur">
                             <input type="hidden" name="Audio_path" id="ap">
                             <input type="hidden" name="Image_path" id="ip" value="./img/laguDefault.jpg">
-                            <input type=" submit" class="saveEdit" value="Save" id="submitButton">
+                            <input type="submit" class="saveEdit" value="Save" id="submitButton">
                         </div>
                     </form>
                 </div>

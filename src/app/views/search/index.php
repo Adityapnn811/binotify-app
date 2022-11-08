@@ -22,11 +22,13 @@
                     <div class="condSearch">
                         <label class="labelSearch" for="sort">Sort A-Z</label>
                         <select name="sort" id="sort" class="sort">
+                            <option value="">None</option>
                             <option value="Asc">Ascending</option>
                             <option value="Desc">Descending</option>
                         </select>
                         <label class="labelSearch" for="sortYear">Sort Year</label>
                         <select name="sortYear" id="sortYear" class="sort">
+                            <option value="">None</option>
                             <option value="Asc">Ascending</option>
                             <option value="Desc">Descending</option>
                         </select>

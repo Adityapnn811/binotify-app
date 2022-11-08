@@ -11,7 +11,7 @@
             if (count($_POST) === 0) {
                 $q ="";
                 $tahun = "";
-                $sort = "asc";
+                $sort = "";
                 $sortYear = '';
                 $genre = "";
                 $page = 1;
@@ -34,12 +34,21 @@
             $offset = $recordPerPage * ($page-1);
             
             if ($genre === "") {
-                $query = "SELECT * FROM $this->table WHERE Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun ORDER BY Judul $sort";
+                $query = "SELECT * FROM $this->table WHERE Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun";
             } else {
-                $query = "SELECT * FROM $this->table WHERE Genre IN ('" . $genre . "') AND (Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun) ORDER BY Judul $sort";
+                $query = "SELECT * FROM $this->table WHERE Genre IN ('" . $genre . "') AND (Judul LIKE :q OR Penyanyi LIKE :q OR YEAR(Tanggal_terbit) = :tahun)";
             }
-            if ($sortYear !== "") {
-                $query .= ", Tanggal_terbit $sortYear";
+            if ($sort != '' || $sortYear != '') {
+                $query .= " ORDER BY ";
+            }
+            if ($sort != '' && $sortYear != '') {
+                $query .= "Judul $sort, Tanggal_terbit $sortYear";
+            } else if ($sort != '' || $sortYear != '') {
+                if ($sort != '') {
+                    $query .= "Judul $sort";
+                } else {
+                    $query .= "Tanggal_terbit $sortYear";
+                }
             }
             // Jalankan query count dulu
             $this->db->query($query);
