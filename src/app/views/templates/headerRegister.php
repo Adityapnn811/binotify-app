@@ -8,6 +8,8 @@
         // Register button clicked
         // cek apakah berhasil
         if ($data["status"] == 200){
+            $_SESSION["username"] = $data["username"];
+            $_SESSION["is_admin"] = false;
             header('location: /home');
             die();
         }else{

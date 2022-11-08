@@ -41,6 +41,7 @@
         
                         if($success){
                             $data["status"] = 200;
+                            $data["username"] = $username;
                         }else{
                             $data["status"] = 500;
                             $data["error_msg"] = "gagal register";
