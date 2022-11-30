@@ -19,9 +19,10 @@
             <?php 
             $number = 1
             ?>
+
     
-            <?php foreach($data["lagu"] as $idx=>$info): ?>
-                <?= laguCardPrem($number, $info["song_id"], $info["Judul"], $info["Penyanyi"], substr($info["Tanggal_terbit"], 0, 4), $info["Genre"], $info["Image_path"])?>
+            <?php foreach($data as $info): ?>
+                <?= laguCardPremium($number, $info["song_id"], $info["Judul"], $info["Audio_path"])?>
                 <?php $number = $number + 1?>
             <?php endforeach; ?>
         </div>

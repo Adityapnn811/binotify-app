@@ -14,8 +14,54 @@ function laguCardPrem($number="0", $id= "1", $judul = "Judul", $penyanyi = "peny
         <div class="lagu-prem-card">
                 <p class="lagu-prem-content-number"> $number </p>
                 <p class="lagu-prem-content-title">$judul</p>
-                <p class="lagu-prem-content-number"> play </p>
+                <button type="button" onClick="Play()">Play|Pause</button>
+                <audio
+                    controls id="audioval"
+                    src="../songs/34+35.mp3" hidden >
+                </audio>
         </div>
+        <script>
+            function Play(){
+                var myAudio = document.getElementById("audioval");
+                if(myAudio.paused) {
+                    myAudio.play();
+                }else {
+                    myAudio.pause();
+                }
+            }
+        
+        
+        
+        </script>
+    EOT;
+
+   echo $html;
+}
+
+function laguCardPremium($number="0", $id= "1", $judul = "Judul", $audiopath ='./songpath' ){
+    $html = <<<"EOT"
+        <div class="lagu-prem-card">
+                <p class="lagu-prem-content-number"> $number </p>
+                <p class="lagu-prem-content-title">$judul</p>
+                <button type="button" onClick="Play()">Play|Pause</button>
+                <audio
+                    controls id="audioval"
+                    src="../songs/34+35.mp3" hidden >
+                </audio>
+        </div>
+        <script>
+            function Play(){
+                var myAudio = document.getElementById("audioval");
+                if(myAudio.paused) {
+                    myAudio.play();
+                }else {
+                    myAudio.pause();
+                }
+            }
+        
+        
+        
+        </script>
     EOT;
 
    echo $html;

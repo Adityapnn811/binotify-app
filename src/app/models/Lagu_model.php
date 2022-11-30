@@ -188,5 +188,12 @@
             $result = $this->db->allResult();
             return $result;
         }
+
+        public function getPremiumSong(){
+            $response = file_get_contents('http://binotify-rest:5000/penyanyi/2/song');
+            $response = json_decode($response, true);
+
+            return $response;
+        }
     }
 ?>
