@@ -19,4 +19,5 @@
         <!-- Masukin StyleSheet CSS di sini -->
         <link rel="stylesheet" href="/css/styles.css" >
         <link rel="stylesheet" href="/css/search.css" >
+        <link rel="stylesheet" href="/css/lagu_premium.css" >
     </head>
