@@ -17,7 +17,6 @@
                 EOT;
             }
             $html .= <<<"EOT"
-                <a href ="/lagu_premium">Lagu Premium</a>
                 <a href ="/list_premium">List Penyanyi Premium</a>
             EOT;
         }
