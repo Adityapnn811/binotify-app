@@ -30,5 +30,11 @@
             $this->db->execute();
             return $this->db->rowCount();
         }
+
+        public function getUserSubs($subscriberId) {
+            $this->db->query("SELECT * FROM $this->table WHERE subscriber_id = :subscriberId");
+            $this->db->bind(':subscriberId', $subscriberId);
+            return $this->db->allResult();
+        }
     }
 ?>
