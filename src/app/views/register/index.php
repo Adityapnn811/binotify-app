@@ -1,6 +1,6 @@
 <div class="login-background">
     <div class="login-title-container">
-        <!-- <img src="img/logo.png" class="login-logo"> -->
+        <img src="/img/spotify-logo.png" class="login-logo">
         <a class="login-title" href="/home" > BINOTIFY </a>
     </div>
         <div class="login-container">
