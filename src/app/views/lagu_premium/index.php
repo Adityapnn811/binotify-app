@@ -16,11 +16,14 @@
     require_once "../app/views/templates/paginationButton.php";    
     require_once '../app/views/templates/navbar.php';
     require_once '../app/views/templates/sidebar.php';
-
+    $body = array(
+        'subscriber_id' => $_SESSION["user_id"],
+    );
     $opts = array('http' =>
                 array(
                     'method'  => 'GET',
-                    'header'  => 'Content-Type: application/json'
+                    'header'  => 'Content-Type: application/json',
+                    'content' => json_encode($body)
                 )
             );
 
