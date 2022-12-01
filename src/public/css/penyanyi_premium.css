@@ -1,0 +1,41 @@
+.penyanyi-prem-card{
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: 18px auto 150px;
+    padding: 10px;
+}
+
+.penyanyi-prem-content-number{
+    color: #b0b0aa;
+    margin: 5px;
+    font-size: 0.8rem;
+    text-align: left;
+}
+
+.penyanyi-prem-content-title{
+    color: #ffffff;
+    margin: 5px;
+    font-size: 0.8rem;
+    text-align: left;
+}
+
+.penyanyi-prem-content-button{
+    border-style: solid;
+    border-color: #b0b0aa;
+    border-radius: 4px;
+    color: #ffffff;
+    margin: 8px;
+    font-size: 0.6rem;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+}
+
+.penyanyi-prem-content-button:hover{
+    border-style: solid;
+    border-color: #ffffff;
+    border-radius: 4px;
+    color: #ffffff;
+    margin: 8px;
+    font-size: 0.6rem;
+    text-align: center;
+}

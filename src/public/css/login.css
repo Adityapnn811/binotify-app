@@ -12,11 +12,18 @@
 .login-title-container{
     padding: 25px 0px 20px;
     justify-content: center;
+    display : flex;
+    align-items : center;
+}
+
+.login-logo{
+    width: 65px;
 }
 
 .login-title{
     color: #000000;
     font-size:45px;
+    
 }
 
 .login-line-divider{
