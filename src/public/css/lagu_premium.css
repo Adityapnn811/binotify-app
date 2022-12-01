@@ -1,0 +1,50 @@
+.lagu-prem-title{
+    padding: 25px 0px 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.lagu-premium-container{
+    padding: 35px;
+}
+
+.lagu-pre-card-container{
+    width: 100%;
+}
+
+.lagu-prem-card{
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: 15px auto 70px;
+    padding: 10px;
+}
+
+.lagu-prem-card:hover{
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: 15px auto 70px;
+    padding: 10px;
+    background-color: rgba(50,51,53,255);
+    border-radius: 5px;
+}
+
+.lagu-prem-content-number{
+    color: #b0b0aa;
+    margin: 5px;
+    font-size: 0.8rem;
+    text-align: left;
+}
+
+.lagu-prem-content-title{
+    color: #ffffff;
+    margin: 5px;
+    font-size: 0.8rem;
+    text-align: left;
+}
+
+.cardContainerPrem {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    text-align: center;
+}
