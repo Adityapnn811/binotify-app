@@ -15,14 +15,14 @@
 .lagu-prem-card{
     display: grid;
     column-gap: 20px;
-    grid-template-columns: 15px auto 70px;
+    grid-template-columns: 18px auto 70px;
     padding: 10px;
 }
 
 .lagu-prem-card:hover{
     display: grid;
     column-gap: 20px;
-    grid-template-columns: 15px auto 70px;
+    grid-template-columns: 18px auto 70px;
     padding: 10px;
     background-color: rgba(50,51,53,255);
     border-radius: 5px;
