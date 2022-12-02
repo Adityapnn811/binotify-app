@@ -6,6 +6,7 @@
         if ($data["status"] == 200){
             $_SESSION["username"] = $data["username"];
             $_SESSION["is_admin"] = $data["is_admin"];
+            $_SESSION["user_id"] = $data["user_id"];
             header('location: /home');
             die();
         }else{

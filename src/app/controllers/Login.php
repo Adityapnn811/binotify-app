@@ -14,6 +14,7 @@
             $data["status"] = 504;
             $data["username"] = "";
             $data["is_admin"] = false;
+            $data["user_id"] = 0;
             $data["error"] = "";
             $passwordInput = $_POST["password"];
             $rawData = $this->model("Login_model")->run();
@@ -24,6 +25,7 @@
                 $data["status"] = 400;
                 $data["username"] = "";
                 $data["is_admin"] = false;
+                $data["user_id"] = 0;
                 $data["error"] = "Username atau password Anda salah";
             }else{
                 $user = $rawData[0];
@@ -32,12 +34,14 @@
                     $data["status"] = 200;
                     $data["username"] = $user["username"];
                     $data["is_admin"] = $user["is_admin"];
+                    $data["user_id"] = $user["user_id"];
                     $data["error"] = "";
                 }else{
                     //password salah
                     $data["status"] = 400;
                     $data["username"] = "";
                     $data["is_admin"] = false;
+                    $data["user_id"] = 0;
                     $data["error"] = "Username atau password Anda salah";
                 }
             }

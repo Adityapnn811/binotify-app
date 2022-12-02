@@ -5,7 +5,6 @@
                 <a href="/" id="binotify-title">|| Binotify</a>
                 <a href="/search">Search</a>
                 <a href="/albums">Daftar Album</a>
-                <a href ="/lagu_premium">Lagu Premium</a>
             EOT;
 
         if (isset($_SESSION["username"])) {
@@ -17,6 +16,9 @@
                     
                 EOT;
             }
+            $html .= <<<"EOT"
+                <a href ="/list_premium">List Penyanyi Premium</a>
+            EOT;
         }
         $html .= "</div>";
         echo $html;
