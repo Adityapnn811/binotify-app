@@ -11,11 +11,11 @@ function penyanyiCardPremium($id= "1", $nama = "nama", $isSubscribe = "NONE", $s
             EOT;
     } else if ($isSubscribe == "PENDING"){
         $html .= <<<"EOT"
-                <p> PENDING </p>
+                <p class="penyanyi-prem-content-button-pending"> Pending </p>
         EOT;
     } else if ($isSubscribe == "REJECTED") {
         $html .= <<<"EOT"
-                <p> REJECTED </p>
+                <p class="penyanyi-prem-content-button-rejected"> Rejected </p>
         EOT;
     } else {
         $html .= <<<"EOT"

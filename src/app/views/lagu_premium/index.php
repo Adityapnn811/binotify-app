@@ -51,7 +51,6 @@
             $number = 1
             ?>
 
-    
             <?php foreach($responses as $info): ?>
                 <?= laguCardPremium($number, $info["song_id"], $info["Judul"], $info["Audio_path"])?>
                 <?php $number = $number + 1?>
@@ -64,10 +63,20 @@
 <script>
     function Play(audiopath){
         var myAudio = document.getElementById(audiopath);
+        playbutton = "play" + audiopath;
+        var myButtonPlay = document.getElementById(playbutton);
+        stopbutton = "stop" + audiopath;
+        var myButtonStop = document.getElementById(stopbutton);
         if(myAudio.paused) {
+            myAudio.currentTime = 0;
             myAudio.play();
+            myButtonPlay.style.display = "none";
+            myButtonStop.style.display = "block";
+
         }else {
             myAudio.pause();
+            myButtonPlay.style.display = "block";
+            myButtonStop.style.display = "none";
         }
     }
 </script>
