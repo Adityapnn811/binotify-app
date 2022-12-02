@@ -17,6 +17,7 @@
     column-gap: 20px;
     grid-template-columns: 18px auto 70px;
     padding: 10px;
+    vertical-align: middle;
 }
 
 .lagu-prem-card:hover{
@@ -40,6 +41,16 @@
     margin: 5px;
     font-size: 0.8rem;
     text-align: left;
+}
+
+.lagu-prem-image-play{
+    display: block;
+}
+
+.lagu-prem-image-stop{
+    display: none;
+    max-width: 100%;  
+    height: auto;  
 }
 
 .cardContainerPrem {

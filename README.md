@@ -130,7 +130,9 @@ Endpoint callback dari service SOAP menerima field yang sesuai dengan tabel subs
 
 ### Screenshot
 1. Halaman penyanyi premium
+![Penyanyi Premium](Screenshots/PenyanyiPremium.jpg)
 2. Halaman lagu premium
+![Lagu Premium](Screenshots/LaguPremium.jpg)
 
 ## Author
 - 13520049 - Aditya Prawira Nugroho

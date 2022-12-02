@@ -39,6 +39,7 @@
     font-size: 0.6rem;
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
 }
 
 .penyanyi-prem-content-button-pending{
