@@ -46,8 +46,13 @@
             $this->view('subscription/result', $array);
         }
 
+        public function checkRequestLocal($subscriberId, $creatorId) {
+            $array = $this->model("Subscription_model")->checkStatus($subscriberId, $creatorId);
+            $this->view('subscription/result', $array);
+        }
+
         public function getStatusById($subscriberId){
-            $client = new SoapClient(SOAP_URL . "/webservice/subscription?wsdl");
+            $client = new SoapClient(SOAP_URL . "/webservice/subscription?wsdl", array('cache_wsdl' => WSDL_CACHE_NONE));
             $params = array(
                 "subscriberId" => $subscriberId,
                 "apiKey" => SOAP_API_KEY,

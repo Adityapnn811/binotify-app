@@ -36,5 +36,12 @@
             $this->db->bind(':subscriberId', $subscriberId);
             return $this->db->allResult();
         }
+
+        public function checkStatus($subscriberId, $creatorId) {
+            $this->db->query("SELECT * FROM $this->table WHERE creator_id = :creatorId AND subscriber_id = :subscriberId");
+            $this->db->bind(':creatorId', $creatorId);
+            $this->db->bind(':subscriberId', $subscriberId);
+            return $this->db->allResult();
+        }
     }
 ?>
