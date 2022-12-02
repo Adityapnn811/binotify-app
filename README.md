@@ -7,6 +7,7 @@
 - [Cara menjalankan server](#cara-menjalankan-server)
 - [Screenshot](#screenshot)
 - [Pembagian tugas](#pembagian-tugas)
+- [Perubahan Yang Dilakukan](#perubahan-yang-dilakukan)
 
 ## Deskripsi
 Wesbite binotify merupakan sebuah website pemutar lagu yang dibuat menggunakan bahasa pemrograman PHP sebagai backend dan HTML, CSS, Javascript sebagai frontend. Website ini dibuat tanpa menggunakan framework. Website ini dapat melakukan login dan register sebagai pengguna biasa. Pengguna terbagi menjadi tiga, yaitu pengguna yang terautentikasi, admin, dan pengguna yang tidak terautentikasi. Ketika masuk sebagai admin, maka website akan menampilkan beberapa menu yang hanya bisa diakses oleh admin seperti daftar users, tambah lagu/album, dan edit lagu/album. Perbedaan antara pengguna yang terautentikasi dan tidak terautentikasi adalah pengguna yang tidak terautentikasi hanya bisa memainkan lagu sebanyak 3 kali per hari. Selain itu, website memiliki fitur untuk melihat detail album/lagu, mencari lagu berdasarkan judul, penyanyi, dan tahun, melakukan sortir berdasarkan judul serta melakukan filter berdasarkan genre.
@@ -104,6 +105,34 @@ extension=mysqli
 - Detail lagu: 13520129
 - Daftar Users: 13520049
 - Tambah Album/Lagu: 13520129
+
+## Perubahan Yang Dilakukan
+### Perubahan
+1. Perubahan Database
+Penambahan tabel subscription yang merupakan “duplikasi” dari tabel di service SOAP untuk mengetahui status subscription pengguna tanpa perlu melakukan request apakah pengguna sudah subscribe atau belum. Data dari tabel ini akan berisi data yang dikirim via callback endpoint.
+2. Halaman List Penyanyi Premium
+Halaman ini menampilkan daftar penyanyi yang menyediakan lagu premium. Halaman ini memanfaatkan endpoint dari sercive REST.
+3. Halaman List Lagu Premium
+Halaman ini menampilkan daftar lagu premium dari penyanyi yang telah di-subscribe oleh pengguna. Halaman ini akan memanfaatkan endpoint dari service REST.
+4. Endpoint Callback'
+Endpoint callback dari service SOAP menerima field yang sesuai dengan tabel subscription.
+
+
+### Pembagian Tugas
+#### Server Side
+- Penyanyi Premium: 1320049
+- Lagu Premium: 13520096
+- Endpoint Callback: 13520049
+
+#### Client Side
+- Penyanyi Premium: 1320096
+- Lagu Premium: 13520096
+
+### Screenshot
+1. Halaman penyanyi premium
+![Penyanyi Premium](Screenshots/PenyanyiPremium.jpg)
+2. Halaman lagu premium
+![Lagu Premium](Screenshots/LaguPremium.jpg)
 
 ## Author
 - 13520049 - Aditya Prawira Nugroho
