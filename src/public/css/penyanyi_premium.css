@@ -38,4 +38,24 @@
     margin: 8px;
     font-size: 0.6rem;
     text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.penyanyi-prem-content-button-pending{
+    border-radius: 4px;
+    color: #ffffff;
+    margin: 8px;
+    font-size: 0.6rem;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+}
+
+.penyanyi-prem-content-button-rejected{
+    border-radius: 4px;
+    color: #ab0707;
+    margin: 8px;
+    font-size: 0.7rem;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    font-weight: bold;
 }
