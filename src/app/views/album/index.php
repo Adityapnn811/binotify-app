@@ -34,7 +34,7 @@ if (!$edit) {
         <div class="infoContainer">
             <div class="playerContainer">
                 <img id="imgCover" alt="cover album" class="coverImg">
-                <audio id="playerLagu" class="songPlayer" preload="auto" controls></audio>
+                <!-- <audio id="playerLagu" class="songPlayer" preload="auto" controls></audio> -->
             </div>
             <div class="detailContainer">
                 <h1 id="judul" class="title"></h1>
@@ -119,7 +119,7 @@ if (!$edit) {
         function setSongs(data, count) {
             document.getElementById("jumlahLagu").innerHTML = count + " Songs";
             console.log(data[0].Audio_path);
-            document.getElementById("playerLagu").src = "." + data[0].Audio_path;
+            // document.getElementById("playerLagu").src = "." + data[0].Audio_path;
         }
 
         function toMinutes(time) {
